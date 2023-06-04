@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import cameraControl from "./camera.js";
-
+import ufo from "./ufo.js"
 const scene = new THREE.Scene();
 const renderer = new THREE.WebGLRenderer();
 
@@ -8,16 +8,18 @@ var ufoShip;
 var camera;
 
 
+main();
+
 function main() {
 	// initializations
 	renderer.setSize(window.innerWidth, window.innerHeight);
 	document.body.appendChild(renderer.domElement);
-	scene.background = new THREE.Color(0xdddddd);
-	const cameraControl = new Camera();
+	scene.background = new THREE.Color("lightblue");
+	const axesHelper = new THREE.AxesHelper(1000);
 	cameraControl.setTarget(new THREE.Vector3(95, 240, 110));
 	camera = cameraControl.camera5;
 
-	ufoShip = new ufo.ufo();
+	ufoShip = new ufo.Ufo();
 
 	scene.add(ufoShip);
 
