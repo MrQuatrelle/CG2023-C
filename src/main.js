@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import cameraControl from "./camera.js";
-import ufo from "./ufo.js"
+// import ufo from "./ufo.js"
 const scene = new THREE.Scene();
 const renderer = new THREE.WebGLRenderer();
 
@@ -18,9 +18,10 @@ function main() {
 	cameraControl.setTarget(new THREE.Vector3(95, 240, 110));
 	camera = cameraControl.camera4;
 
-	ufoShip = new ufo.Ufo();
+	// ufoShip = new ufo.Ufo();
 
-	scene.add(ufoShip,axesHelper);
+	// scene.add(ufoShip,axesHelper);
+	scene.add(axesHelper);
 
 	animate();
 }
@@ -68,6 +69,11 @@ function keydownHandler(e) {
 		case '5':
 			console.log("[INFO]: showing camera5");
 			camera = cameraControl.camera5;
+			break;
+
+		case '6':
+			console.log("[INFO]: showing camera6");
+			camera = cameraControl.camera6;
 			break;
 
 		default:
