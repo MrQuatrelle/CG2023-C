@@ -17,7 +17,7 @@ function main() {
 	scene.background = new THREE.Color("lightblue");
 	const axesHelper = new THREE.AxesHelper(1000);
 	cameraControl.setTarget(new THREE.Vector3(95, 240, 110));
-	camera = cameraControl.camera5;
+	camera = cameraControl.camera4;
 
 	ufoShip = new ufo.Ufo();
 
@@ -74,4 +74,6 @@ function keydownHandler(e) {
 			console.log("[INFO]: unknown key");
 			break;
 	}
+
+	delete keysPressed[e.key];
 }

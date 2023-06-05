@@ -23,7 +23,7 @@ class Ufo extends THREE.Object3D {
 			sphereGeometry,
 			new THREE.MeshBasicMaterial({
 					color: 0xaaaaaa,
-					wireframe: true
+					wireframe: false
 			}));
 		return sphereMesh;
 	}
