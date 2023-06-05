@@ -4,6 +4,7 @@ import cameraControl from "./camera.js";
 // import ufo from "./ufo.js"
 const scene = new THREE.Scene();
 const renderer = new THREE.WebGLRenderer();
+renderer.shadowMapEnabled = true;
 
 var ufoShip, camera;
 
@@ -16,22 +17,29 @@ function main() {
 	document.body.appendChild(renderer.domElement);
 	scene.background = new THREE.Color("lightblue");
 	const axesHelper = new THREE.AxesHelper(1000);
-	cameraControl.setTarget(new THREE.Vector3(0,0,0));
-	camera = cameraControl.camera4;
+	cameraControl.setTarget(new THREE.Vector3(95, 240, 110));
+	camera = cameraControl.camera1;
 
 	ufoShip = new ufo.Ufo();
+	tempFloor();
 	scene.add(ufoShip,axesHelper);
-	
-	scene.add(axesHelper);
+
 
 	animate();
 }
-
+function tempFloor(){
+	const floor = new THREE.Mesh(new THREE.PlaneGeometry( 500, 500, 1, 1), new THREE.MeshPhongMaterial({color: 0x111180, side: THREE.DoubleSide}));
+	floor.rotateX(Math.PI/2);
+	floor.position.set(0,0,0);
+	scene.add(floor);
+	scene.add(new THREE.AmbientLight("lightyellow", 0.05))
+}
 function animate() {
 	// tldr, everytime the program has time to render a frame, it'll call this
 	// function
 
 	window.addEventListener("keydown", keydownHandler);
+
 	renderer.render(scene, camera);
 	requestAnimationFrame(animate);
 }
@@ -76,11 +84,17 @@ function keydownHandler(e) {
 			console.log("[INFO]: showing camera6");
 			camera = cameraControl.camera6;
 			break;
+		case 'p':
+			ufoShip.togglePointLights();
+			console.log("[INFO]:\tToggling UFO Point Lights...\n\tCurrent state: ", ufoShip.getPointLights().getLightsState(), e.key);
+			break;
+		case 's':
+			ufoShip.toggleSpotlight();
+			console.log("[INFO]:\tToggling UFO Spotlight...\n\tCurrent state: ", ufoShip.getSpotlightState());
+			break;
 
 		default:
 			console.log("[INFO]: unknown key");
 			break;
 	}
-
-	delete keysPressed[e.key];
 }
