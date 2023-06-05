@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import ufo from "./ufo.js"
 import cameraControl from "./camera.js";
 // import ufo from "./ufo.js"
 const scene = new THREE.Scene();
@@ -15,12 +16,12 @@ function main() {
 	document.body.appendChild(renderer.domElement);
 	scene.background = new THREE.Color("lightblue");
 	const axesHelper = new THREE.AxesHelper(1000);
-	cameraControl.setTarget(new THREE.Vector3(95, 240, 110));
+	cameraControl.setTarget(new THREE.Vector3(0,0,0));
 	camera = cameraControl.camera4;
 
-	// ufoShip = new ufo.Ufo();
-
-	// scene.add(ufoShip,axesHelper);
+	ufoShip = new ufo.Ufo();
+	scene.add(ufoShip,axesHelper);
+	
 	scene.add(axesHelper);
 
 	animate();
