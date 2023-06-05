@@ -4,8 +4,7 @@ import ufo from "./ufo.js"
 const scene = new THREE.Scene();
 const renderer = new THREE.WebGLRenderer();
 
-var ufoShip;
-var camera;
+var ufoShip, camera;
 
 
 main();
@@ -21,7 +20,7 @@ function main() {
 
 	ufoShip = new ufo.Ufo();
 
-	scene.add(ufoShip);
+	scene.add(ufoShip,axesHelper);
 
 	animate();
 }
@@ -30,6 +29,7 @@ function animate() {
 	// tldr, everytime the program has time to render a frame, it'll call this
 	// function
 
+	window.addEventListener("keydown", keydownHandler);
 	renderer.render(scene, camera);
 	requestAnimationFrame(animate);
 }
