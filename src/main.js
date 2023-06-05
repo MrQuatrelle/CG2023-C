@@ -25,11 +25,17 @@ function main() {
     scene.add(axesHelper);
 
     // TODO: TESTING
-    let houseMesh = new THREE.Mesh(house.houseGeom,
+    let houseMesh = new THREE.Mesh(
+        new house.houseWalls(),
         new THREE.MeshBasicMaterial({ color: 0x333333 })
     );
 
-    scene.add(houseMesh);
+    let roofMesh = new THREE.Mesh(
+        new house.houseRoof(),
+        new THREE.MeshBasicMaterial({ color: 0xff0000 })
+    );
+
+    scene.add(houseMesh, roofMesh);
 
     animate();
 }
