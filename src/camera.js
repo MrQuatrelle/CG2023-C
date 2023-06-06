@@ -21,6 +21,13 @@ const top = new THREE.OrthographicCamera(
     - window.innerHeight / 2,
 );
 
+const bottom = new THREE.OrthographicCamera(
+    - window.innerWidth / 2,
+    window.innerWidth / 2,
+    window.innerHeight / 2,
+    - window.innerHeight / 2,
+);
+
 const isoOrthographic = new THREE.OrthographicCamera(
     - window.innerWidth / 2,
     window.innerWidth / 2,
@@ -36,7 +43,7 @@ const isoPerspective = new THREE.PerspectiveCamera(
 );
 
 var target;
-const cameras = [front, lateral, top, isoOrthographic, isoPerspective]
+const cameras = [front, lateral, top, bottom, isoOrthographic, isoPerspective]
 
 function setTarget(t) {
     target = t;
@@ -60,10 +67,10 @@ function update() {
 
 }
 
-//TODO: change this coordinates once the robot is added
 lateral.position.set(1000, 240, 110);
 front.position.set(95, 240, 1000);
 top.position.set(95, 1000, 110);
+bottom.position.set(0, -500, 0);
 isoOrthographic.position.set(600, 600, 600);
 isoPerspective.position.set(600, 600, 600);
 
@@ -75,5 +82,6 @@ export default {
     camera3: top,
     camera4: isoOrthographic,
     camera5: isoPerspective,
+    camera6: bottom,
 }
 
