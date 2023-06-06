@@ -22,7 +22,7 @@ class Ufo extends THREE.Object3D {
 		this.spotlight.position.set(0,-30,0);
 		
 		this.add(this.cabin, this.ship,  this.spotlightHousing, this.spotlight, this.lights);
-		this.translateY(300);
+		this.translateY(200);
 	}
 
 	#generateCabin() {
@@ -61,6 +61,7 @@ class Ufo extends THREE.Object3D {
 
 	#generateSpotlight() {
 		const spotlight = new THREE.SpotLight('white', 100.0, 300.0, Math.PI/16, 0.0, 0.9);
+		spotlight.castShadow = true;
 		const target = new THREE.Object3D();
 		target.position.set(0,-65,0);
 		spotlight.target=target;
@@ -73,7 +74,7 @@ class Ufo extends THREE.Object3D {
 	}
 
 	getPointLights(){
-		return this.lights;
+		return this.lights
 	}
 
 	toggleSpotlight(){
@@ -83,6 +84,7 @@ class Ufo extends THREE.Object3D {
 	getSpotlightState(){
 		return this.spotlight.visible;
 	}
+
 }
 
 export default {

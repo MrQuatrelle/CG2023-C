@@ -32,14 +32,14 @@ function tempFloor(){
 	floor.rotateX(Math.PI/2);
 	floor.position.set(0,0,0);
 	scene.add(floor);
-	scene.add(new THREE.AmbientLight("lightyellow", 0.05))
+	scene.add(new THREE.AmbientLight("lightyellow", 0.02))
 }
 function animate() {
 	// tldr, everytime the program has time to render a frame, it'll call this
 	// function
 
 	window.addEventListener("keydown", keydownHandler);
-
+	ufoShip.rotateY(Math.PI/128);
 	renderer.render(scene, camera);
 	requestAnimationFrame(animate);
 }
