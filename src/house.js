@@ -28,7 +28,7 @@ houseGeometry.setAttribute("position",
 );
 
 
-class houseWallsGeometry extends THREE.BufferGeometry {
+class HouseWallsGeometry extends THREE.BufferGeometry {
     constructor() {
         super();
 
@@ -64,7 +64,7 @@ class houseWallsGeometry extends THREE.BufferGeometry {
 }
 
 
-class houseRoofGeometry extends THREE.BufferGeometry {
+class HouseRoofGeometry extends THREE.BufferGeometry {
     constructor() {
         super();
 
@@ -93,7 +93,27 @@ class houseRoofGeometry extends THREE.BufferGeometry {
     }
 }
 
+class House extends THREE.Object3D {
+    constructor() {
+        super();
+        let walls = new THREE.Mesh(new HouseWallsGeometry(),
+            new THREE.MeshStandardMaterial({
+                color: 0x333333,
+                metalness: 1,
+            })
+        );
+
+        let roof = new THREE.Mesh(new HouseRoofGeometry(),
+            new THREE.MeshStandardMaterial({
+                color: 0xff5500,
+                metalness: 2,
+            })
+        );
+
+        this.add(walls, roof);
+    }
+}
+
 export default {
-    houseWalls: houseWallsGeometry,
-    houseRoof: houseRoofGeometry,
+    House: House,
 }

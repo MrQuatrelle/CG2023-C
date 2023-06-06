@@ -67,7 +67,6 @@ function update() {
 
 }
 
-//TODO: change this coordinates once the robot is added
 lateral.position.set(1000, 240, 110);
 front.position.set(95, 240, 1000);
 top.position.set(95, 1000, 110);
