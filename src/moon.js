@@ -3,32 +3,50 @@ import * as THREE from "three";
 class Moon extends THREE.Object3D{
 
     #moon
-    //#light
+    #directionalLight
+    #ambientLight
+    #radius
 
-    constructor(){
+    constructor(radius){
         super();
+        this.radius = radius;
         this.moon = this.#generateMoon();
-        this.add(this.moon);
+        this.directionalLight = this.#generateDirectionalLight();
+        this.ambientLight = this.#generateAmbientLight();
+        this.add(this.moon, this.directionalLight, this.ambientLight);
     }
 
     #generateMoon(){
 
-        const moonGeom = new THREE.SphereGeometry(300, 30 ,30);
+        const moonGeom = new THREE.SphereGeometry(this.radius, 30 ,30);
 
         var textureLoader = new THREE.TextureLoader();
-
-        // Load the moon texture
         var texture = textureLoader.load('moon_texture.jpg');
-        // Create a material with MeshPhongMaterial and apply the moon texture
-            var material = new THREE.MeshPhongMaterial({
-                map: texture,
-                emissive: 0xFEFCD7,
-                emissiveIntensity: 0.05,
-            });
+       
+        var material = new THREE.MeshPhongMaterial({
+            map: texture,
+            emissive: 0xFFFFFF,
+            emissiveIntensity: 0.1,
+        });
 
         var moonHandler = new THREE.Mesh(moonGeom, material);
 
         return moonHandler;
+    }
+
+    #generateDirectionalLight(){
+
+        var directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+        directionalLight.position.set(50, 0, 250);
+
+        return directionalLight;
+    }
+
+    #generateAmbientLight(){
+
+        var ambientLight = new THREE.AmbientLight( 0x777777 ); // soft white light
+        
+        return ambientLight;
     }
 }
 
