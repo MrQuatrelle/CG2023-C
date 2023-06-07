@@ -57,23 +57,18 @@ const heightMapTexture = new THREE.TextureLoader().load(
         console.error("fail to source heightmap");
     }
 );
-heightMapTexture.wrapS = heightMapTexture.wrapT = THREE.RepeatWrapping;
 
 
 const terrainMaterial = new THREE.MeshPhongMaterial({
-    color: 0x555555,
+    color: 0xffffff,
+    map: heightMapTexture,
     displacementMap: heightMapTexture,
     displacementScale: 300,
     shininess: 5,
     shadowSide: THREE.DoubleSide,
-    flatShading: true,
 });
 
 const terrain = new THREE.Mesh(geometry, terrainMaterial);
-terrainMaterial.needsUpdate = true;
-terrain.receiveShadow = true;
-terrain.geometry.computeVertexNormals();
-terrain.geometry.needsUpdate = true;
 
 
 export default {
