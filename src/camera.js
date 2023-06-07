@@ -48,6 +48,7 @@ const cameras = [front, lateral, top, bottom, isoOrthographic, isoPerspective]
 function setTarget(t) {
     target = t;
     cameras.forEach((c) => { c.lookAt(t) });
+        
 }
 
 function update() {

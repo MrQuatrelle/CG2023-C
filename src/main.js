@@ -1,12 +1,13 @@
 import * as THREE from "three";
 import cameraControl from "./camera.js";
 import house from "./house.js";
+import terrain from "./terrain.js";
 
 const scene = new THREE.Scene();
 const renderer = new THREE.WebGLRenderer();
+renderer.shadowMap.enabled = true;
 
 var ufoShip, camera;
-
 
 main();
 
@@ -22,7 +23,13 @@ function main() {
     // ufoShip = new ufo.Ufo();
 
     // scene.add(ufoShip,axesHelper);
-    scene.add(axesHelper);
+    const dl = new THREE.DirectionalLight(0xffffff, 1);
+    dl.position.set(-500, 500, 500);
+    dl.castShadow = true;
+    dl.matrixAutoUpdate = true;
+    dl.rotateX(Math.PI / 4);
+
+    scene.add(axesHelper, terrain.terrain, dl);
 
     animate();
 }
@@ -77,15 +84,15 @@ function keydownHandler(e) {
             camera = cameraControl.camera6;
             break;
 
-        // case 'w':
-        //     console.log("[INFO]: showing wiremesh");
-        //     scene.traverse((c) => {
-        //         if (c.isMesh) {
-        //             c.material.wireframe = !(c.material.wireframe);
-        //             c.material.needsUpdate = true;
-        //         }
-        //     });
-        //     break;
+        case 'w':
+            console.log("[INFO]: showing wiremesh");
+            scene.traverse((c) => {
+                if (c.isMesh) {
+                    c.material.wireframe = !(c.material.wireframe);
+                    c.material.needsUpdate = true;
+                }
+            });
+            break;
 
         default:
             console.log("[INFO]: unknown key");
