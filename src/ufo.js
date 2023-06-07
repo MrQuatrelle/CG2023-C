@@ -20,19 +20,21 @@ class Ufo extends THREE.Object3D {
 		this.spotlightHousing.position.set(0, -30, 0);
 		this.cabin.position.set(0,30,0);
 		this.spotlight.position.set(0,-30,0);
-		
+		this.castShadow = true;
+		this.receiveShadow = true;
 		this.add(this.cabin, this.ship,  this.spotlightHousing, this.spotlight, this.lights);
-		this.translateY(200);
 	}
 
 	#generateCabin() {
 		const sphereGeometry = new THREE.SphereGeometry(40, 32, 32, 0, 2 * Math.PI, 0, (3 / 4) * Math.PI);
-		const sphereMesh = new THREE.Mesh(
-			sphereGeometry,
-			new THREE.MeshPhongMaterial({
+		const sphereMaterial = new THREE.MeshPhongMaterial({
 					color: 0xaaaaaa,
-					wireframe: false
-			}));
+					wireframe:false,
+					transparent: false
+			});
+		const sphereMesh = new THREE.Mesh(sphereGeometry,sphereMaterial);
+		sphereMesh.castShadow = true;
+		sphereMesh.receiveShadow = true;
 		return sphereMesh;
 	}
 
@@ -43,8 +45,11 @@ class Ufo extends THREE.Object3D {
 		const ellipsoidMesh = new THREE.Mesh(ellipsoidGeometry,
 			new THREE.MeshPhongMaterial({
 					color: 0x44ff44,
-					wireframe: false
+					wireframe: false,
+					transparent: false
 			}));
+		ellipsoidMesh.castShadow = true;
+		ellipsoidMesh.receiveShadow = true;
 		return ellipsoidMesh;
 	}
 
@@ -54,6 +59,9 @@ class Ufo extends THREE.Object3D {
 			color: 0xFF00AA
 		});
 		const tubeMesh = new THREE.Mesh( tubeGeom, tubeMat);
+
+		tubeMesh.castShadow = true;
+		tubeMesh.receiveShadow = true;
 		return tubeMesh;		
 	}
 

@@ -5,6 +5,8 @@ import cameraControl from "./camera.js";
 const scene = new THREE.Scene();
 const renderer = new THREE.WebGLRenderer();
 renderer.shadowMapEnabled = true;
+renderer.shadowMap.autoUpdate = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
 var ufoShip, camera;
 
@@ -15,13 +17,15 @@ function main() {
 	// initializations
 	renderer.setSize(window.innerWidth, window.innerHeight);
 	document.body.appendChild(renderer.domElement);
-	scene.background = new THREE.Color("lightblue");
+	//scene.background = new THREE.Color("lightblue");
 	const axesHelper = new THREE.AxesHelper(1000);
 	cameraControl.setTarget(new THREE.Vector3(95, 240, 110));
 	camera = cameraControl.camera1;
 
 	ufoShip = new ufo.Ufo();
-	tempFloor();
+	ufoShip.castShadow =true;
+	ufoShip.receiveShadow = true;
+	//tempFloor();
 	scene.add(ufoShip,axesHelper);
 
 
@@ -32,7 +36,7 @@ function tempFloor(){
 	floor.rotateX(Math.PI/2);
 	floor.position.set(0,0,0);
 	scene.add(floor);
-	scene.add(new THREE.AmbientLight("lightyellow", 0.02))
+	//scene.add(new THREE.AmbientLight("lightyellow", 0.02))
 }
 function animate() {
 	// tldr, everytime the program has time to render a frame, it'll call this
