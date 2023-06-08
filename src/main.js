@@ -14,6 +14,7 @@ main();
 function main() {
     // initializations
     renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.shadowMap.enabled = true;
     document.body.appendChild(renderer.domElement);
     scene.background = new THREE.Color("lightblue");
     let axesHelper = new THREE.AxesHelper(1000);

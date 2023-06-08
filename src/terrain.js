@@ -47,7 +47,6 @@ const loader = new THREE.ImageLoader();
 
 const geometry = new THREE.PlaneGeometry(1000, 1000, 500, 500);
 
-geometry.rotateX(Math.PI / -2);
 
 const heightMapTexture = new THREE.TextureLoader().load(
     "../heightmap.png",
@@ -61,7 +60,7 @@ const heightMapTexture = new THREE.TextureLoader().load(
 
 const terrainMaterial = new THREE.MeshPhongMaterial({
     color: 0xffffff,
-    map: heightMapTexture,
+    bumpMap: heightMapTexture,
     displacementMap: heightMapTexture,
     displacementScale: 300,
     shininess: 5,
@@ -70,6 +69,11 @@ const terrainMaterial = new THREE.MeshPhongMaterial({
 
 const terrain = new THREE.Mesh(geometry, terrainMaterial);
 
+terrain.castShadow = true;
+terrain.receiveShadow = true;
+
+terrain.rotateX(Math.PI / -2);
+terrain.geometry.computeVertexNormals();
 
 export default {
     terrain: terrain,
