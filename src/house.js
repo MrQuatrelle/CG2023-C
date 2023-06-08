@@ -1,33 +1,6 @@
 import * as THREE from "three";
 
 
-const houseVertexes = new Float32Array([
-    60, 45, 125,    // v2
-    60, 45, -125,   // v3
-    -60, 45, 125,   // v6
-    -60, 45, -125,  // v7
-    0, 75, -125,    // v8
-    0, 75, 125,     // v9
-]);
-
-
-const houseIndexes = [
-    6, 7, 8,
-    6, 8, 9,
-    3, 8, 7,
-    2, 6, 9,
-];
-
-
-const houseGeometry = new THREE.BufferGeometry();
-
-houseGeometry.setIndex(houseIndexes);
-
-houseGeometry.setAttribute("position",
-    new THREE.BufferAttribute(houseVertexes, 3)
-);
-
-
 class HouseWallsGeometry extends THREE.BufferGeometry {
     constructor() {
         super();
@@ -79,7 +52,8 @@ class HouseRoofGeometry extends THREE.BufferGeometry {
                     0, 75, -125,
                     0, 75, 125,
                 ]),
-                3)
+                3
+            )
         );
 
         this.setIndex([
@@ -93,27 +67,68 @@ class HouseRoofGeometry extends THREE.BufferGeometry {
     }
 }
 
+
+class windowGeometry extends THREE.BufferGeometry {
+    constructor() {
+        super();
+        this.setAttribute(
+            "position",
+            new THREE.BufferAttribute(
+                new Float32Array([
+                    -15, -15, 0,
+                    15, -15, 0,
+                    15, 15, 0,
+                    -15, 15, 0,
+                ]),
+                3
+            )
+        );
+
+        this.setIndex([
+            0, 2, 1,
+            0, 3, 2,
+        ]);
+    }
+}
+
+
 class House extends THREE.Object3D {
     constructor() {
         super();
-        let walls = new THREE.Mesh(new HouseWallsGeometry(),
+        const walls = new THREE.Mesh(
+            new HouseWallsGeometry(),
             new THREE.MeshStandardMaterial({
-                color: 0x333333,
-                metalness: 1,
+                color: 0xffffff,
             })
         );
+        walls.castShadow = true;
+        walls.receiveShadow = true;
 
-        let roof = new THREE.Mesh(new HouseRoofGeometry(),
+        const roof = new THREE.Mesh(
+            new HouseRoofGeometry(),
             new THREE.MeshStandardMaterial({
                 color: 0xff5500,
-                metalness: 2,
             })
         );
+        roof.castShadow = true;
+        roof.receiveShadow = true;
 
-        this.add(walls, roof);
+        const leftWindow = new THREE.Mesh(
+            new windowGeometry(),
+            new THREE.MeshStandardMaterial({
+                color: 0x0033ff88,
+                
+            })
+        );
+        leftWindow.castShadow = true;
+        leftWindow.receiveShadow = true;
+
+        leftWindow.position.set(90, 0, 30);
+
+        this.add(walls, roof, leftWindow);
     }
 }
 
 export default {
-    House: House,
+    House: House
 }

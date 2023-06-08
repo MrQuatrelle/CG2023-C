@@ -60,6 +60,7 @@ const heightMapTexture = new THREE.TextureLoader().load(
 
 const terrainMaterial = new THREE.MeshPhongMaterial({
     color: 0xffffff,
+    map: heightMapTexture,
     bumpMap: heightMapTexture,
     displacementMap: heightMapTexture,
     displacementScale: 300,

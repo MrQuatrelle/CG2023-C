@@ -5,6 +5,8 @@ const front = new THREE.OrthographicCamera(
     window.innerWidth / 2,
     window.innerHeight / 2,
     - window.innerHeight / 2,
+    1,
+    5000
 );
 
 const lateral = new THREE.OrthographicCamera(
@@ -12,6 +14,8 @@ const lateral = new THREE.OrthographicCamera(
     window.innerWidth / 2,
     window.innerHeight / 2,
     - window.innerHeight / 2,
+    1,
+    5000
 );
 
 const top = new THREE.OrthographicCamera(
@@ -19,6 +23,8 @@ const top = new THREE.OrthographicCamera(
     window.innerWidth / 2,
     window.innerHeight / 2,
     - window.innerHeight / 2,
+    1,
+    5000
 );
 
 const bottom = new THREE.OrthographicCamera(
@@ -26,6 +32,8 @@ const bottom = new THREE.OrthographicCamera(
     window.innerWidth / 2,
     window.innerHeight / 2,
     - window.innerHeight / 2,
+    1,
+    5000
 );
 
 const isoOrthographic = new THREE.OrthographicCamera(
@@ -33,13 +41,15 @@ const isoOrthographic = new THREE.OrthographicCamera(
     window.innerWidth / 2,
     window.innerHeight / 2,
     - window.innerHeight / 2,
+    1,
+    5000
 );
 
 const isoPerspective = new THREE.PerspectiveCamera(
     75,
     window.innerWidth / window.innerHeight,
     1,
-    3000
+    5000
 );
 
 var target;
@@ -72,7 +82,7 @@ lateral.position.set(1000, 240, 110);
 front.position.set(95, 240, 1000);
 top.position.set(95, 1000, 110);
 bottom.position.set(0, -500, 0);
-isoOrthographic.position.set(100, 100, 100);
+isoOrthographic.position.set(200, 200, 200);
 isoPerspective.position.set(100, 100, 100);
 
 export default {

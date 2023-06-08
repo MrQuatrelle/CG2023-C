@@ -15,8 +15,8 @@ function main() {
     // initializations
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.shadowMap.enabled = true;
+    renderer.shadowMap.needsUpdate = true;
     document.body.appendChild(renderer.domElement);
-    scene.background = new THREE.Color("lightblue");
     let axesHelper = new THREE.AxesHelper(1000);
     cameraControl.setTarget(new THREE.Vector3(0, 0, 0));
     camera = cameraControl.camera4;
@@ -24,13 +24,18 @@ function main() {
     // ufoShip = new ufo.Ufo();
 
     // scene.add(ufoShip,axesHelper);
-    const dl = new THREE.DirectionalLight(0xffffff, 1);
-    dl.position.set(-500, 500, 500);
+    const dl = new THREE.DirectionalLight(0xffffff, 10);
+    dl.position.set(100, 100, 100);
     dl.castShadow = true;
-    dl.matrixAutoUpdate = true;
-    dl.rotateX(Math.PI / 4);
+    dl.lookAt(0, 0, 0);
 
-    scene.add(axesHelper, terrain.terrain, dl);
+    const dlHelper = new THREE.DirectionalLightHelper(dl);
+
+    // TODO: TESTING
+    const h = new house.House();
+    h.position.set(0, 100, 0);
+
+    scene.add(axesHelper, dl, dlHelper, h, terrain.terrain);
 
     animate();
 }
