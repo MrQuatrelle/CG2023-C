@@ -5,17 +5,17 @@ import lights from "./ufo_lights.js"
 
 class Ufo extends THREE.Object3D {
 
-    #cabin
-    #ship
-    #spotlight
-    #spotlightHousing
-    #spotLightHelper
-    #lights
-    #cabinMaterials
-    #shipMaterials
-    #spotlightHousingMaterials
+	#cabin
+	#ship
+	#spotlight
+	#spotlightHousing
+	#spotLightHelper
+	#lights
+	#cabinMaterials
+	#shipMaterials
+	#spotlightHousingMaterials
 
-    #rotationSpeed = 2; //units a second
+	#rotationSpeed = 2; //units a second
     #moveSpeed = 200; //units a second
 
     doGoRight = false;
