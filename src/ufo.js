@@ -12,7 +12,6 @@ class Ufo extends THREE.Object3D {
 	#spotlight
 	#spotlightHousing
 	#spotLightHelper
-	#amblight
 	#lights
 	#cabinMaterials
 	#shipMaterials
