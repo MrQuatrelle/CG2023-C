@@ -24,7 +24,7 @@ function main() {
     // ufoShip = new ufo.Ufo();
 
     // scene.add(ufoShip,axesHelper);
-    const dl = new THREE.DirectionalLight(0xffffff, 1);
+    const dl = new THREE.DirectionalLight(0xffffff, 10);
     dl.position.set(-500, 500, 500);
     dl.castShadow = true;
     dl.matrixAutoUpdate = true;
