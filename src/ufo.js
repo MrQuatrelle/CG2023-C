@@ -207,27 +207,27 @@ class Ufo extends THREE.Object3D {
 
     #rotate() {
         const delta = this.#delta * this.#rotationSpeed;
-        this.rotateY(delta);
+        this.rotation.y += delta;
     }
 
     #moveRight() {
         const delta = this.#delta * this.#moveSpeed;
-        this.translateX(delta);
+        this.position.x += delta;
     }
 
     #moveLeft() {
         const delta = this.#delta * this.#moveSpeed;
-        this.translateX(-delta);
+        this.position.x += -delta;
     }
 
     #moveForwards() {
         const delta = this.#delta * this.#moveSpeed;
-        this.translateZ(delta);
+        this.position.z += delta;
     }
 
     #moveBackwards() {
         const delta = this.#delta * this.#moveSpeed;
-        this.translateZ(-delta);
+        this.position.z += -delta;
     }
 
     setRight(value) {
