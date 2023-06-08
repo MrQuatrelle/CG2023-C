@@ -7,202 +7,203 @@ const moveSpeed = 2; //units a second
 
 class Ufo extends THREE.Object3D {
 
-	#cabin
-	#ship
-	#spotlight
-	#spotlightHousing
-	#spotLightHelper
-	#amblight
-	#lights
-	#cabinMaterials
-	#shipMaterials
-	#spotlightHousingMaterials
+    #cabin
+    #ship
+    #spotlight
+    #spotlightHousing
+    #spotLightHelper
+    #lights
+    #cabinMaterials
+    #shipMaterials
+    #spotlightHousingMaterials
 
-	#clock
-	#delta
+    #clock
+    #delta
 
-	constructor() {
+    constructor() {
 
-		super();
-		
-		this.#clock = new THREE.Clock();
-		this.#delta = this.#clock.getDelta();
-		this.#cabinMaterials = [
-			new THREE.MeshLambertMaterial({
-					color: 0xaaaaaa,
-					wireframe:false,
-					transparent: false,
-					shadowSide: THREE.DoubleSide
-			}),
-			new THREE.MeshPhongMaterial({
-					color: 0xaaaaaa,
-					wireframe:false,
-					transparent: false,
-					shadowSide: THREE.DoubleSide
+        super();
 
-			}),
-			new THREE.MeshToonMaterial({
-					color: 0xaaaaaa,
-					wireframe:false,
-					transparent: false,
-					shadowSide: THREE.DoubleSide
+        this.#clock = new THREE.Clock();
+        this.#delta = this.#clock.getDelta();
+        this.#cabinMaterials = [
+            new THREE.MeshLambertMaterial({
+                color: 0xaaaaaa,
+                wireframe: false,
+                transparent: false,
+                shadowSide: THREE.DoubleSide
+            }),
+            new THREE.MeshPhongMaterial({
+                color: 0xaaaaaa,
+                wireframe: false,
+                transparent: false,
+                shadowSide: THREE.DoubleSide
 
-			})];
-		this.#shipMaterials = [
-			new THREE.MeshLambertMaterial({
-					color: 0x44ff44,
-					wireframe: false,
-					transparent: false,
-					shadowSide: THREE.DoubleSide
-			}),
-			new THREE.MeshPhongMaterial({
-					color: 0x44ff44,
-					wireframe: false,
-					transparent: false,
-					shadowSide: THREE.DoubleSide
-			}),
-			new THREE.MeshToonMaterial({
-					color: 0x44ff44,
-					wireframe: false,
-					transparent: false,
-					shadowSide: THREE.DoubleSide
-			})];
-		this.#spotlightHousingMaterials = [
-			new THREE.MeshLambertMaterial( {
-			color: 0xFF00AA,
-			side: THREE.DoubleSide
-			}),
-			new THREE.MeshPhongMaterial( {
-			color: 0xFF00AA,
-			side: THREE.DoubleSide
-			}),
-			new THREE.MeshToonMaterial( {
-			color: 0xFF00AA,
-			side: THREE.DoubleSide
-			})]
+            }),
+            new THREE.MeshToonMaterial({
+                color: 0xaaaaaa,
+                wireframe: false,
+                transparent: false,
+                shadowSide: THREE.DoubleSide
 
-		this.#cabin = this.#generateCabin();
-		this.#ship = this.#generateShip();
-		this.#spotlight = this.#generateSpotlight();
-		this.#spotlightHousing = this.#generateSpotlightHousing();
-		this.#lights = new lights.UFO_Lights();
-		this.#lights.translateY(-20);
-		this.#spotlightHousing.position.set(0, -30, 0);
-		this.#cabin.position.set(0,30,0);
-		this.#spotlight.position.set(0,-30,0);
-		this.castShadow = true;
-		this.receiveShadow = true;
-		this.add(this.#cabin, this.#ship,  this.#spotlightHousing, this.#spotlight, this.#lights);
-	}
+            })];
+        this.#shipMaterials = [
+            new THREE.MeshLambertMaterial({
+                color: 0x44ff44,
+                wireframe: false,
+                transparent: false,
+                shadowSide: THREE.DoubleSide
+            }),
+            new THREE.MeshPhongMaterial({
+                color: 0x44ff44,
+                wireframe: false,
+                transparent: false,
+                shadowSide: THREE.DoubleSide
+            }),
+            new THREE.MeshToonMaterial({
+                color: 0x44ff44,
+                wireframe: false,
+                transparent: false,
+                shadowSide: THREE.DoubleSide
+            })];
+        this.#spotlightHousingMaterials = [
+            new THREE.MeshLambertMaterial({
+                color: 0xFF00AA,
+                side: THREE.DoubleSide
+            }),
+            new THREE.MeshPhongMaterial({
+                color: 0xFF00AA,
+                side: THREE.DoubleSide
+            }),
+            new THREE.MeshToonMaterial({
+                color: 0xFF00AA,
+                side: THREE.DoubleSide
+            })]
 
-	#generateCabin() {
-		const sphereGeometry = new THREE.SphereGeometry(40, 32, 32, 0, 2 * Math.PI, 0, (5/8)*Math.PI);
-		const sphereMesh = new THREE.Mesh(sphereGeometry,this.#cabinMaterials[0]);
-		sphereMesh.castShadow = true;
-		sphereMesh.receiveShadow = true;
+        this.#cabin = this.#generateCabin();
+        this.#ship = this.#generateShip();
+        this.#spotlight = this.#generateSpotlight();
+        this.#spotlightHousing = this.#generateSpotlightHousing();
+        this.#lights = new lights.UFO_Lights();
+        this.#lights.translateY(-20);
+        this.#spotlightHousing.position.set(0, -30, 0);
+        this.#cabin.position.set(0, 30, 0);
+        this.#spotlight.position.set(0, -30, 0);
+        this.castShadow = true;
+        this.receiveShadow = true;
+        this.add(this.#cabin, this.#ship, this.#spotlightHousing, this.#spotlight, this.#lights);
+    }
 
-		sphereMesh.translateY(70);
-		return sphereMesh;
-	}
+    #generateCabin() {
+        const sphereGeometry = new THREE.SphereGeometry(40, 32, 32, 0, 2 * Math.PI, 0, (5 / 8) * Math.PI);
+        const sphereMesh = new THREE.Mesh(sphereGeometry, this.#cabinMaterials[0]);
+        sphereMesh.castShadow = true;
+        sphereMesh.receiveShadow = true;
 
-	#generateShip() {
-		const ellipsoidGeometry = new THREE.SphereGeometry(20);
+        sphereMesh.translateY(70);
+        return sphereMesh;
+    }
 
-		ellipsoidGeometry.scale(5, 1.5, 5);
-		const ellipsoidMesh = new THREE.Mesh(ellipsoidGeometry, this.#shipMaterials[0]);
-		ellipsoidMesh.castShadow = true;
-		ellipsoidMesh.receiveShadow = true;
-		return ellipsoidMesh;
-	}
+    #generateShip() {
+        const ellipsoidGeometry = new THREE.SphereGeometry(20);
 
-	#generateSpotlightHousing() {
-		const tubeGeom = new THREE.CylinderGeometry(60.0, 60.0, 20.0,32,10, true, 0, 2*Math.PI);
-		const tubeMesh = new THREE.Mesh( tubeGeom, this.#spotlightHousingMaterials[0]);
+        ellipsoidGeometry.scale(5, 1.5, 5);
+        const ellipsoidMesh = new THREE.Mesh(ellipsoidGeometry, this.#shipMaterials[0]);
+        ellipsoidMesh.castShadow = true;
+        ellipsoidMesh.receiveShadow = true;
+        return ellipsoidMesh;
+    }
 
-		tubeMesh.castShadow = true;
-		tubeMesh.receiveShadow = true;
-		return tubeMesh;		
-	}
+    #generateSpotlightHousing() {
+        const tubeGeom = new THREE.CylinderGeometry(60.0, 60.0, 20.0, 32, 10, true, 0, 2 * Math.PI);
+        const tubeMesh = new THREE.Mesh(tubeGeom, this.#spotlightHousingMaterials[0]);
+
+        tubeMesh.castShadow = true;
+        tubeMesh.receiveShadow = true;
+        return tubeMesh;
+    }
 
 
-	#generateSpotlight() {
-		const spotlight = new THREE.SpotLight('white', 100.0, 300.0, Math.PI/6, 0.0, 0.9);
-		spotlight.castShadow = true;
-		const target = new THREE.Object3D();
-		target.position.set(0,-65,0);
-		spotlight.target=target;
-		this.#spotLightHelper = new THREE.SpotLightHelper(spotlight);
-		spotlight.add(target);
-		return spotlight;
-	}
-	togglePointLights(){
-		this.#lights.toggleLights();
-	}
+    #generateSpotlight() {
+        const spotlight = new THREE.SpotLight('white', 100.0, 300.0, Math.PI / 6, 0.0, 0.9);
+        spotlight.castShadow = true;
+        const target = new THREE.Object3D();
+        target.position.set(0, -65, 0);
+        spotlight.target = target;
+        this.#spotLightHelper = new THREE.SpotLightHelper(spotlight);
+        spotlight.add(target);
+        return spotlight;
+    }
+    togglePointLights() {
+        this.#lights.toggleLights();
+    }
 
-	getPointLights(){
-		let dings = [];
-		let count=0;
-		this.#lights.traverse((obj) => {
-			if(obj instanceof THREE.PointLight){
-				dings[count++]=obj;
-			}
-		})
-		return dings;
-	}
-	changeMaterials(type){
-		this.#cabin.material = this.#cabinMaterials[type];
-		this.#ship.material = this.#shipMaterials[type];
-		this.#spotlightHousing.material = this.#spotlightHousingMaterials[type];
-		this.#lights.changeMaterials(type);
+    getPointLights() {
+        let dings = [];
+        let count = 0;
+        this.#lights.traverse((obj) => {
+            if (obj instanceof THREE.PointLight) {
+                dings[count++] = obj;
+            }
+        })
+        return dings;
+    }
+    changeMaterials(type) {
+        this.#cabin.material = this.#cabinMaterials[type];
+        this.#ship.material = this.#shipMaterials[type];
+        this.#spotlightHousing.material = this.#spotlightHousingMaterials[type];
+        this.#lights.changeMaterials(type);
 
-	}
+    }
 
-	toggleSpotlight(){
-		this.#spotlight.visible = !this.#spotlight.visible;
-	}
+    toggleSpotlight() {
+        this.#spotlight.visible = !this.#spotlight.visible;
+    }
 
-	getPointLightHelpers(){
-		return this.#lights.getLightHelpers();
-	}
+    getPointLightHelpers() {
+        return this.#lights.getLightHelpers();
+    }
 
-	getSpotlightState(){
-		return this.#spotlight.visible;
-	}º
+    getSpotlightState() {
+        return this.#spotlight.visible;
+    } º
 
-	getSpotLightHelper(){
-		return this.#spotLightHelper;
-	}
+    getSpotLightHelper() {
+        return this.#spotLightHelper;
+    }
 
-	rotate(){
-		this.#delta = this.#clock.getDelta();
-		this.#delta *= rotationSpeed;
-		this.rotateY(this.#delta);
-	}
+    rotate() {
+        this.#delta = this.#clock.getDelta();
+        this.#delta *= rotationSpeed;
+        this.rotateY(this.#delta);
+    }
 
-	moveRight(clock, delta){
-		delta = clock.getDelta();
-		delta *= moveSpeed;
-		this.translateX(this.#delta*100);
-	}
-	moveLeft(){
-		this.#delta = this.#clock.getDelta();
-		this.#delta *= moveSpeed;
-		this.translateX(-this.#delta);
-	}
-	moveForwards(){
-		this.#delta = this.#clock.getDelta();
-		this.#delta *= moveSpeed;
-		this.translateZ(this.#delta);
-	}
+    moveRight(clock, delta) {
+        delta = clock.getDelta();
+        delta *= moveSpeed;
+        this.translateX(this.#delta * 100);
+    }
 
-	moveBackwards(){
-		this.#delta = this.#clock.getDelta();
-		this.#delta *= moveSpeed;
-		this.translateZ(-this.#delta);
-	}
+    moveLeft() {
+        this.#delta = this.#clock.getDelta();
+        this.#delta *= moveSpeed;
+        this.translateX(-this.#delta);
+    }
+
+    moveForwards() {
+        this.#delta = this.#clock.getDelta();
+        this.#delta *= moveSpeed;
+        this.translateZ(this.#delta);
+    }
+
+    moveBackwards() {
+        this.#delta = this.#clock.getDelta();
+        this.#delta *= moveSpeed;
+        this.translateZ(-this.#delta);
+    }
 
 }
 
 export default {
-	Ufo: Ufo
+    Ufo: Ufo
 }
