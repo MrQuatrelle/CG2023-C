@@ -97,7 +97,7 @@ class House extends THREE.Object3D {
         super();
         const walls = new THREE.Mesh(
             new HouseWallsGeometry(),
-            new THREE.MeshStandardMaterial({
+            new THREE.MeshPhongMaterial({
                 color: 0xffffff,
                 side: THREE.DoubleSide,
             })
@@ -107,7 +107,7 @@ class House extends THREE.Object3D {
 
         const roof = new THREE.Mesh(
             new HouseRoofGeometry(),
-            new THREE.MeshStandardMaterial({
+            new THREE.MeshPhongMaterial({
                 color: 0xff5500,
                 side: THREE.DoubleSide,
             })
@@ -116,7 +116,7 @@ class House extends THREE.Object3D {
 
         const leftWindow = new THREE.Mesh(
             new windowGeometry(),
-            new THREE.MeshStandardMaterial({
+            new THREE.MeshPhongMaterial({
                 color: 0x0033ff88,
                 side: THREE.DoubleSide,
 
@@ -124,9 +124,21 @@ class House extends THREE.Object3D {
         );
         leftWindow.geometry.computeVertexNormals();
 
-        leftWindow.position.set(90, 0, 30);
+        leftWindow.position.set(80, 0, 60);
 
-        this.add(walls, roof, leftWindow);
+        const rightWindow = new THREE.Mesh(
+            new windowGeometry(),
+            new THREE.MeshPhongMaterial({
+                color: 0x0033ff88,
+                side: THREE.DoubleSide,
+
+            })
+        );
+        rightWindow.geometry.computeVertexNormals();
+
+        rightWindow.position.set(-80, 0, 60);
+
+        this.add(walls, roof, leftWindow, rightWindow);
     }
 }
 
