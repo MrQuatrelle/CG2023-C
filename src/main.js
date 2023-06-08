@@ -29,6 +29,7 @@ function main() {
     dl.matrixAutoUpdate = true;
     dl.rotateX(Math.PI / 4);
 
+    terrain.terrain.position.set(0, -400, 0);
     scene.add(axesHelper, terrain.terrain, dl);
     scene.add(axesHelper);
 
@@ -63,8 +64,8 @@ let keysPressed = {};
 
 function dropShip() {
     ufoShip = new ufo.Ufo();
-    ufoShip.translateY(200);
-    tempFloor();
+    ufoShip.translateY(400);
+    //tempFloor();
     scene.add(ufoShip);
     addHelpers();
 }
@@ -131,15 +132,6 @@ function keydownHandler(e) {
             console.log("[INFO]: showing camera6");
             camera = cameraControl.camera6;
             break;
-
-        case 'w':
-            console.log("[INFO]: showing wiremesh");
-            scene.traverse((c) => {
-                if (c.isMesh) {
-                    c.material.wireframe = !(c.material.wireframe);
-                    c.material.needsUpdate = true;
-                }
-            });
 
         case 'q':
             console.log("[INFO]: Setting Materials as Lambert.")

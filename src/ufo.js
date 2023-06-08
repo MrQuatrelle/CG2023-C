@@ -35,20 +35,20 @@ class Ufo extends THREE.Object3D {
 
         this.#cabinMaterials = [
             new THREE.MeshLambertMaterial({
-                color: 0xaaaaaa,
+                color: 0x555555,
                 wireframe: false,
                 transparent: false,
                 shadowSide: THREE.DoubleSide
             }),
             new THREE.MeshPhongMaterial({
-                color: 0xaaaaaa,
+                color: 0x555555,
                 wireframe: false,
                 transparent: false,
                 shadowSide: THREE.DoubleSide
 
             }),
             new THREE.MeshToonMaterial({
-                color: 0xaaaaaa,
+                color: 0x555555,
                 wireframe: false,
                 transparent: false,
                 shadowSide: THREE.DoubleSide
@@ -56,19 +56,19 @@ class Ufo extends THREE.Object3D {
             })];
         this.#shipMaterials = [
             new THREE.MeshLambertMaterial({
-                color: 0x44ff44,
+                color: 0x225522,
                 wireframe: false,
                 transparent: false,
                 shadowSide: THREE.DoubleSide
             }),
             new THREE.MeshPhongMaterial({
-                color: 0x44ff44,
+                color: 0x225522,
                 wireframe: false,
                 transparent: false,
                 shadowSide: THREE.DoubleSide
             }),
             new THREE.MeshToonMaterial({
-                color: 0x44ff44,
+                color: 0x225522,
                 wireframe: false,
                 transparent: false,
                 shadowSide: THREE.DoubleSide

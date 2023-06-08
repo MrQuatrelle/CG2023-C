@@ -1,6 +1,6 @@
 import * as THREE from "three";
 
-const geometry = new THREE.PlaneGeometry(1000, 1000, 500, 500);
+const geometry = new THREE.PlaneGeometry(5000, 5000, 500, 500);
 
 
 const heightMapTexture = new THREE.TextureLoader().load(
@@ -18,7 +18,7 @@ const terrainMaterial = new THREE.MeshPhongMaterial({
     map: heightMapTexture,
     bumpMap: heightMapTexture,
     displacementMap: heightMapTexture,
-    displacementScale: 300,
+    displacementScale: 3000,
     shininess: 5,
     shadowSide: THREE.DoubleSide,
 });
