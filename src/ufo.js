@@ -15,8 +15,8 @@ class Ufo extends THREE.Object3D {
 	#shipMaterials
 	#spotlightHousingMaterials
 
-	#rotationSpeed = 2; //units a second
-    #moveSpeed = 200; //units a second
+	#rotationSpeed = 3; //units a second
+    #moveSpeed = 300; //units a second
 
     doGoRight = false;
     doGoLeft = false;
