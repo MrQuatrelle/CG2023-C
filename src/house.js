@@ -9,29 +9,29 @@ class HouseWallsGeometry extends THREE.BufferGeometry {
             "position",
             new THREE.BufferAttribute(
                 new Float32Array([
-                    60, -75, -125,  // v0
-                    60, -75, 125,   // v1
-                    60, 45, 125,    // v2
-                    60, 45, -125,   // v3
-                    -60, -75, -125, // v4
-                    -60, -75, 125,  // v5
-                    -60, 45, 125,   // v6
-                    -60, 45, -125,  // v7
+                    -125, -75, 60,  // v0
+                    125, -75, 60,   // v1
+                    125, 45, 60,    // v2
+                    -125, 45, 60,   // v3
+                    -125, -75, -60, // v4
+                    125, -75, -60,  // v5
+                    125, 45, -60,   // v6
+                    -125, 45, -60,  // v7
                 ]),
                 3)
         );
 
         this.setIndex([
-            2, 1, 0,
-            3, 2, 0,
-            7, 3, 0,
-            4, 7, 0,
-            5, 4, 0,
-            1, 5, 0,
-            2, 6, 1,
-            6, 5, 1,
-            5, 6, 4,
-            6, 7, 4,
+            0, 1, 2,
+            0, 2, 3,
+            0, 3, 7,
+            0, 7, 4,
+            0, 4, 5,
+            0, 5, 1,
+            1, 6, 2,
+            1, 5, 6,
+            4, 6, 5,
+            4, 7, 6,
         ]);
     }
 }
@@ -45,12 +45,12 @@ class HouseRoofGeometry extends THREE.BufferGeometry {
             "position",
             new THREE.BufferAttribute(
                 new Float32Array([
-                    60, 45, -125,
-                    60, 45, 125,
-                    -60, 45, 125,
-                    -60, 45, -125,
-                    0, 75, -125,
-                    0, 75, 125,
+                    -125, 45, 60,
+                    125, 45, 60,
+                    125, 45, -60,
+                    -125, 45, -60,
+                    -125, 75, 0,
+                    125, 75, 0,
                 ]),
                 3
             )
@@ -85,8 +85,8 @@ class windowGeometry extends THREE.BufferGeometry {
         );
 
         this.setIndex([
-            0, 2, 1,
-            0, 3, 2,
+            0, 1, 2,
+            0, 2, 3,
         ]);
     }
 }
@@ -99,29 +99,30 @@ class House extends THREE.Object3D {
             new HouseWallsGeometry(),
             new THREE.MeshStandardMaterial({
                 color: 0xffffff,
+                side: THREE.DoubleSide,
             })
         );
-        walls.castShadow = true;
-        walls.receiveShadow = true;
+
+        walls.geometry.computeVertexNormals();
 
         const roof = new THREE.Mesh(
             new HouseRoofGeometry(),
             new THREE.MeshStandardMaterial({
                 color: 0xff5500,
+                side: THREE.DoubleSide,
             })
         );
-        roof.castShadow = true;
-        roof.receiveShadow = true;
+        roof.geometry.computeVertexNormals();
 
         const leftWindow = new THREE.Mesh(
             new windowGeometry(),
             new THREE.MeshStandardMaterial({
                 color: 0x0033ff88,
-                
+                side: THREE.DoubleSide,
+
             })
         );
-        leftWindow.castShadow = true;
-        leftWindow.receiveShadow = true;
+        leftWindow.geometry.computeVertexNormals();
 
         leftWindow.position.set(90, 0, 30);
 
