@@ -2,8 +2,6 @@ import * as THREE from "three";
 import lights from "./ufo_lights.js"
 
 
-const rotationSpeed = 2; //units a second
-const moveSpeed = 2; //units a second
 
 class Ufo extends THREE.Object3D {
 
@@ -17,6 +15,14 @@ class Ufo extends THREE.Object3D {
     #shipMaterials
     #spotlightHousingMaterials
 
+    #rotationSpeed = 2; //units a second
+    #moveSpeed = 200; //units a second
+
+    doGoRight = false;
+    doGoLeft = false;
+    doGoForward = false;
+    doGoBackward = false;
+
     #clock
     #delta
 
@@ -26,6 +32,7 @@ class Ufo extends THREE.Object3D {
 
         this.#clock = new THREE.Clock();
         this.#delta = this.#clock.getDelta();
+
         this.#cabinMaterials = [
             new THREE.MeshLambertMaterial({
                 color: 0xaaaaaa,
@@ -65,7 +72,9 @@ class Ufo extends THREE.Object3D {
                 wireframe: false,
                 transparent: false,
                 shadowSide: THREE.DoubleSide
-            })];
+            })
+        ];
+
         this.#spotlightHousingMaterials = [
             new THREE.MeshLambertMaterial({
                 color: 0xFF00AA,
@@ -78,7 +87,8 @@ class Ufo extends THREE.Object3D {
             new THREE.MeshToonMaterial({
                 color: 0xFF00AA,
                 side: THREE.DoubleSide
-            })]
+            })
+        ];
 
         this.#cabin = this.#generateCabin();
         this.#ship = this.#generateShip();
@@ -91,11 +101,13 @@ class Ufo extends THREE.Object3D {
         this.#spotlight.position.set(0, -30, 0);
         this.castShadow = true;
         this.receiveShadow = true;
-        this.add(this.#cabin, this.#ship, this.#spotlightHousing, this.#spotlight, this.#lights);
+        this.add(this.#cabin, this.#ship, this.#spotlightHousing,
+            this.#spotlight, this.#lights);
     }
 
     #generateCabin() {
-        const sphereGeometry = new THREE.SphereGeometry(40, 32, 32, 0, 2 * Math.PI, 0, (5 / 8) * Math.PI);
+        const sphereGeometry = new THREE.SphereGeometry(
+            40, 32, 32, 0, 2 * Math.PI, 0, (5 / 8) * Math.PI);
         const sphereMesh = new THREE.Mesh(sphereGeometry, this.#cabinMaterials[0]);
         sphereMesh.castShadow = true;
         sphereMesh.receiveShadow = true;
@@ -166,44 +178,76 @@ class Ufo extends THREE.Object3D {
 
     getSpotlightState() {
         return this.#spotlight.visible;
-    } º
+    }
 
     getSpotLightHelper() {
         return this.#spotLightHelper;
     }
 
-    rotate() {
+    update() {
         this.#delta = this.#clock.getDelta();
-        this.#delta *= rotationSpeed;
-        this.rotateY(this.#delta);
+        this.#rotate();
+
+        if (this.doGoRight) {
+            this.#moveRight();
+        }
+
+        if (this.doGoLeft) {
+            this.#moveLeft();
+        }
+
+        if (this.doGoForwards) {
+            this.#moveForwards();
+        }
+
+        if (this.doGoBackwards) {
+            this.#moveBackwards();
+        }
     }
 
-    moveRight(clock, delta) {
-        delta = clock.getDelta();
-        delta *= moveSpeed;
-        this.translateX(this.#delta * 100);
+    #rotate() {
+        const delta = this.#delta * this.#rotationSpeed;
+        this.rotateY(delta);
     }
 
-    moveLeft() {
-        this.#delta = this.#clock.getDelta();
-        this.#delta *= moveSpeed;
-        this.translateX(-this.#delta);
+    #moveRight() {
+        const delta = this.#delta * this.#moveSpeed;
+        this.translateX(delta);
     }
 
-    moveForwards() {
-        this.#delta = this.#clock.getDelta();
-        this.#delta *= moveSpeed;
-        this.translateZ(this.#delta);
+    #moveLeft() {
+        const delta = this.#delta * this.#moveSpeed;
+        this.translateX(-delta);
     }
 
-    moveBackwards() {
-        this.#delta = this.#clock.getDelta();
-        this.#delta *= moveSpeed;
-        this.translateZ(-this.#delta);
+    #moveForwards() {
+        const delta = this.#delta * this.#moveSpeed;
+        this.translateZ(delta);
+    }
+
+    #moveBackwards() {
+        const delta = this.#delta * this.#moveSpeed;
+        this.translateZ(-delta);
+    }
+
+    setRight(value) {
+        this.doGoRight = value;
+    }
+
+    setLeft(value) {
+        this.doGoLeft = value;
+    }
+
+    setForwards(value) {
+        this.doGoForwards = value;
+    }
+
+    setBackwards(value) {
+        this.doGoBackwards = value;
     }
 
 }
 
 export default {
-    Ufo: Ufo
+    Ufo: Ufo,
 }
