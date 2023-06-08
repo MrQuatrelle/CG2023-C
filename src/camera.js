@@ -72,8 +72,8 @@ lateral.position.set(1000, 240, 110);
 front.position.set(95, 240, 1000);
 top.position.set(95, 1000, 110);
 bottom.position.set(0, -500, 0);
-isoOrthographic.position.set(600, 600, 600);
-isoPerspective.position.set(600, 600, 600);
+isoOrthographic.position.set(100, 100, 100);
+isoPerspective.position.set(100, 100, 100);
 
 export default {
     setTarget: setTarget,

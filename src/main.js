@@ -18,7 +18,7 @@ function main() {
     document.body.appendChild(renderer.domElement);
     scene.background = new THREE.Color("lightblue");
     let axesHelper = new THREE.AxesHelper(1000);
-    cameraControl.setTarget(new THREE.Vector3(95, 240, 110));
+    cameraControl.setTarget(new THREE.Vector3(0, 0, 0));
     camera = cameraControl.camera4;
 
     // ufoShip = new ufo.Ufo();
