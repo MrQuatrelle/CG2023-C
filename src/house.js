@@ -91,6 +91,29 @@ class windowGeometry extends THREE.BufferGeometry {
     }
 }
 
+class doorGeometry extends THREE.BufferGeometry {
+    constructor() {
+        super();
+        this.setAttribute(
+            "position",
+            new THREE.BufferAttribute(
+                new Float32Array([
+                    -15, -40, 0,
+                    15, -40, 0,
+                    15, 40, 0,
+                    -15, 40, 0,
+                ]),
+                3
+            )
+        );
+
+        this.setIndex([
+            0, 1, 2,
+            0, 2, 3,
+        ]);
+    }
+}
+
 
 class House extends THREE.Object3D {
     constructor() {
@@ -119,11 +142,10 @@ class House extends THREE.Object3D {
             new THREE.MeshPhongMaterial({
                 color: 0x0033ff88,
                 side: THREE.DoubleSide,
-
             })
         );
-        leftWindow.geometry.computeVertexNormals();
 
+        leftWindow.geometry.computeVertexNormals();
         leftWindow.position.set(80, 0, 60);
 
         const rightWindow = new THREE.Mesh(
@@ -135,10 +157,20 @@ class House extends THREE.Object3D {
             })
         );
         rightWindow.geometry.computeVertexNormals();
-
         rightWindow.position.set(-80, 0, 60);
 
-        this.add(walls, roof, leftWindow, rightWindow);
+        const door = new THREE.Mesh(
+            new doorGeometry(),
+            new THREE.MeshPhongMaterial({
+                color: "brown",
+                side: THREE.DoubleSide,
+
+            })
+        );
+        door.geometry.computeVertexNormals();
+        door.position.set(0, -35, 60);
+
+        this.add(walls, roof, leftWindow, rightWindow, door);
     }
 }
 

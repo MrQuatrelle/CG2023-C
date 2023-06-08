@@ -24,7 +24,7 @@ function main() {
     // ufoShip = new ufo.Ufo();
 
     // scene.add(ufoShip,axesHelper);
-    const dl = new THREE.SpotLight(0xffffff, 10, 10000, Math.PI);
+    const dl = new THREE.SpotLight(0xffffff, 10, 10000, 10);
     dl.position.set(100, 200, 100);
     dl.castShadow = true;
     dl.lookAt(0, 0, 0);
@@ -35,7 +35,7 @@ function main() {
     const h = new house.House();
     h.position.set(0, 100, 0);
 
-    scene.add(axesHelper, dl, dlHelper, h, terrain.terrain);
+    scene.add(axesHelper, dl, h, terrain.terrain);
 
     animate();
 }
