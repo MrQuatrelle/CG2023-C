@@ -1,4 +1,6 @@
 import * as THREE from "three";
+import { VRButton } from "three/examples/jsm/webxr/VRButton.js";
+
 import house from "./house.js";
 import terrain from "./terrain.js";
 import ufo from "./ufo.js"
@@ -14,6 +16,8 @@ renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
 var ufoShip, camera, home, ground, moon2;
 var trees;
+var VR = false;
+var VRToggle;
 
 main();
 
@@ -23,16 +27,16 @@ function main() {
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.needsUpdate = true;
     document.body.appendChild(renderer.domElement);
-    let axesHelper = new THREE.AxesHelper(1000);
-    cameraControl.setTarget(new THREE.Vector3(0, 0, 0));
-    camera = cameraControl.camera4;
 
-    const dl = new THREE.DirectionalLight(0xffffff, 5);
-    dl.position.set(-500, 500, 500);
-    dl.castShadow = true;
+    let axesHelper = new THREE.AxesHelper(1000);
+    cameraControl.setTarget(new THREE.Vector3(0, 150, 0));
+    camera = cameraControl.camera1;
+
+    const dl = new THREE.DirectionalLight(0xffffff, 2);
+    dl.position.set(100, 500, 500);
     dl.lookAt(0, 0, 0);
     ground = new terrain.Terrain(); 
-    ground.position.set(0, -400, 0);
+    ground.position.set(0, -350, 0);
 
     scene.add(textures.skyDome)
 
@@ -43,35 +47,35 @@ function main() {
     })
 
     moon2 = new moon.Moon(500);
+
     home = new house.House();
-    home.position.set(0, 100, 0);
+    home.position.set(150, 100, 0);
 
     scene.add(axesHelper, dl,  home, ground);
     tree.iterateGrid(scene);  
 
 
-    animate();
+    renderer.setAnimationLoop(animate);
+    removeHelpers();
 }
 
-function tempFloor() {
-    const floor = new THREE.Mesh(new THREE.PlaneGeometry(500, 500, 1, 1),
-        new THREE.MeshPhongMaterial({
-            color: 0x111180,
-            side: THREE.DoubleSide,
-        })
-    );
-    floor.rotateX(Math.PI / 2);
-    floor.position.set(0, 0, 0);
-    scene.add(floor);
-}
+// function tempFloor() {
+//     const floor = new THREE.Mesh(new THREE.PlaneGeometry(500, 500, 1, 1),
+//         new THREE.MeshPhongMaterial({
+//             color: 0x111180,
+//             side: THREE.DoubleSide,
+//         })
+//     );
+//     floor.rotateX(Math.PI / 2);
+//     floor.position.set(0, 0, 0);
+//     scene.add(floor);
+// }
 
 function animate() {
     // tldr, everytime the program has time to render a frame, it'll call this
     // function
     ufoShip.update();
-
     renderer.render(scene, camera);
-    requestAnimationFrame(animate);
 }
 
 let keysPressed = {};
@@ -106,6 +110,23 @@ function addHelpers() {
 
 }
 
+function swapCameras() {
+    if (!VR) {
+        console.log("[INFO]: Switching to VR camera.")
+        VRToggle = VRButton.createButton(renderer);
+        document.body.appendChild(VRToggle);
+        renderer.xr.enabled = true;
+        VR = true;
+    }
+    else {
+        console.log("[INFO]: Switching to normal camera.")
+        document.body.removeChild(VRToggle);
+        renderer.xr.enabled = false;
+        camera = cameraControl.camera1;
+        VR = false;
+    }
+}
+
 window.addEventListener("resize", () => {
     renderer.setSize(window.innerWidth, window.innerHeight);
     cameraControl.update();
@@ -114,37 +135,13 @@ window.addEventListener("resize", () => {
 window.addEventListener("keydown", keydownHandler);
 
 function keydownHandler(e) {
-    keysPressed[e.key] = true;
+    if (keysPressed[e.key])
+        return;
 
+    keysPressed[e.key] = true;
     switch (e.key) {
         case '1':
-            console.log("[INFO]: showing camera1");
-            camera = cameraControl.camera1;
-            break;
-
-        case '2':
-            console.log("[INFO]: showing camera2");
-            camera = cameraControl.camera2;
-            break;
-
-        case '3':
-            console.log("[INFO]: showing camera3");
-            camera = cameraControl.camera3;
-            break;
-
-        case '4':
-            console.log("[INFO]: showing camera4");
-            camera = cameraControl.camera4;
-            break;
-
-        case '5':
-            console.log("[INFO]: showing camera5");
-            camera = cameraControl.camera5;
-            break;
-
-        case '6':
-            console.log("[INFO]: showing camera6");
-            camera = cameraControl.camera6;
+            swapCameras();
             break;
 
         case 'q':
