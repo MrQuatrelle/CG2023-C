@@ -4,7 +4,7 @@ const isoPerspective = new THREE.PerspectiveCamera(
     75,
     window.innerWidth / window.innerHeight,
     1,
-    5000
+    10000
 );
 
 const stereoCamera = new THREE.StereoCamera();

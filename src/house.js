@@ -242,19 +242,19 @@ const roofMaterials = [
 
 const windowsMaterials = [
     new THREE.MeshLambertMaterial({
-        color: 0x0033ff88,
+        color: 0x0000ff88,
         side: THREE.FrontSide,
     }),
     new THREE.MeshPhongMaterial({
-        color: 0x0033ff88,
+        color: 0x0000ff88,
         side: THREE.FrontSide,
     }),
     new THREE.MeshToonMaterial({
-        color: 0x0033ff88,
+        color: 0x0000ff88,
         side: THREE.FrontSide,
     }),
     new THREE.MeshBasicMaterial({
-        color: 0x0033ff88,
+        color: 0x0000ff88,
         side: THREE.FrontSide,
     })
 ];

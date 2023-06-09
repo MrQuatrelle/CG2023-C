@@ -47,11 +47,12 @@ function main() {
     })
 
     moon2 = new moon.Moon(500);
+    moon2.position.set(-1000, 1000, -3000);
 
     home = new house.House();
     home.position.set(150, 100, 0);
 
-    scene.add(axesHelper, dl,  home, ground);
+    scene.add(axesHelper, dl,  home, ground, moon2);
     tree.iterateGrid(scene);  
 
 
