@@ -1,6 +1,3 @@
-import * as THREE from "three";
-import { VRButton } from "three/examples/jsm/webxr/VRButton.js";
-
 const scene = new THREE.Scene();
 const renderer = new THREE.WebGLRenderer();
 renderer.shadowMap.autoUpdate = true;
