@@ -3,6 +3,8 @@ import house from "./house.js";
 import terrain from "./terrain.js";
 import ufo from "./ufo.js"
 import cameraControl from "./camera.js";
+import tree from "./tree_generation.js";
+import moon from "./moon.js";
 
 const scene = new THREE.Scene();
 const renderer = new THREE.WebGLRenderer();
@@ -32,10 +34,13 @@ function main() {
 
     dropShip();
 
+    moon = new moon.Moon(50);
     home = new house.House();
     home.position.set(0, 100, 0);
 
     scene.add(axesHelper, dl, home, ground);
+    tree.iterateGrid(scene);
+
 
     animate();
 }
