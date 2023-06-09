@@ -1,50 +1,5 @@
 import * as THREE from "three";
 
-const front = new THREE.OrthographicCamera(
-    - window.innerWidth / 2,
-    window.innerWidth / 2,
-    window.innerHeight / 2,
-    - window.innerHeight / 2,
-    1,
-    5000
-);
-
-const lateral = new THREE.OrthographicCamera(
-    - window.innerWidth / 2,
-    window.innerWidth / 2,
-    window.innerHeight / 2,
-    - window.innerHeight / 2,
-    1,
-    5000
-);
-
-const top = new THREE.OrthographicCamera(
-    - window.innerWidth / 2,
-    window.innerWidth / 2,
-    window.innerHeight / 2,
-    - window.innerHeight / 2,
-    1,
-    5000
-);
-
-const bottom = new THREE.OrthographicCamera(
-    - window.innerWidth / 2,
-    window.innerWidth / 2,
-    window.innerHeight / 2,
-    - window.innerHeight / 2,
-    1,
-    5000
-);
-
-const isoOrthographic = new THREE.OrthographicCamera(
-    - window.innerWidth / 2,
-    window.innerWidth / 2,
-    window.innerHeight / 2,
-    - window.innerHeight / 2,
-    1,
-    5000
-);
-
 const isoPerspective = new THREE.PerspectiveCamera(
     75,
     window.innerWidth / window.innerHeight,
@@ -52,47 +7,32 @@ const isoPerspective = new THREE.PerspectiveCamera(
     5000
 );
 
+const stereoCamera = new THREE.StereoCamera();
+const dolly = new THREE.Object3D();
+dolly.add(stereoCamera);
+
 var target;
-const cameras = [front, lateral, top, bottom, isoOrthographic, isoPerspective]
 
 function setTarget(t) {
     target = t;
-    cameras.forEach((c) => { c.lookAt(t) });
-        
+    isoPerspective.lookAt(t);
+
 }
 
 function update() {
-    cameras.forEach((c) => {
-        if (c.isOrthographicCamera) {
-            c.right = window.innerWidth / 2;
-            c.left = -window.innerWidth / 2;
-            c.top = window.innerHeight / 2;
-            c.bottom = -window.innerHeight / 2;
-        }
-        else if (c.isPerspectiveCamera) {
-            c.aspect = window.innerWidth / window.innerHeight;
-        }
-
-        c.updateProjectionMatrix();
-    });
-
+    isoPerspective.aspect = window.innerWidth / window.innerHeight;
+    isoPerspective.updateProjectionMatrix();
+    stereoCamera.updateProjectionMatrix();
 }
 
-lateral.position.set(1000, 240, 110);
-front.position.set(95, 240, 1000);
-top.position.set(95, 1000, 110);
-bottom.position.set(0, -500, 0);
-isoOrthographic.position.set(200, 200, 200);
-isoPerspective.position.set(100, 100, 100);
+isoPerspective.position.set(700, 150, 700);
+dolly.position.set(700, 150, 700);
+
 
 export default {
     setTarget: setTarget,
     update: update,
-    camera1: front,
-    camera2: lateral,
-    camera3: top,
-    camera4: isoOrthographic,
-    camera5: isoPerspective,
-    camera6: bottom,
+    camera1: isoPerspective,
+    camera2: stereoCamera,
 }
 
