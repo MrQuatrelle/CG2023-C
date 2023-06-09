@@ -77,6 +77,7 @@ class Sobreiro extends THREE.Object3D {
 		this.#yepTree();
 
 		this.add(this.#tronco, this.#troncoSecundario, this.#branch);
+		this.rotateY(orientation);
 		this.#copas.forEach((c) => {this.add(c)})
 		
 	}
@@ -121,7 +122,6 @@ class Sobreiro extends THREE.Object3D {
 			0);
 		this.#copas[0].position.set(-this.#height/5,this.#height/1.8,0)
 		this.#copas[1].position.set(this.#height/4, this.#height/1.5,0)
-
 	}
 
 	changeMaterials(type){

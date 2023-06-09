@@ -12,8 +12,8 @@ function iterateGrid(scene){
     
     var probability = 0.1;  //probabilidade de os sobreiros spawnarem num chunk
 
-    const minHeight = 100;  //altura minima dos sobreiros
-    const maxHeight = 400;  //altura maxima
+    const minHeight = 50;  //altura minima dos sobreiros
+    const maxHeight = 100;  //altura maxima
 
     const minAngle = 0;     //angulo minimo dos sobreiros
     const maxAngle = 2 * Math.PI;      //angulo maximo
