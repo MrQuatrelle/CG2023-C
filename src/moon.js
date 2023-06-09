@@ -25,7 +25,7 @@ class Moon extends THREE.Object3D{
        
         var material = new THREE.MeshPhongMaterial({
             map: texture,
-            emissive: 0xFFFFFF,
+            emissive: 0xFEFCD7,
             emissiveIntensity: 0.1,
         });
 
