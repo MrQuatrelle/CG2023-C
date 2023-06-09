@@ -83,24 +83,17 @@ let keysPressed = {};
 
 function dropShip() {
     ufoShip = new ufo.Ufo();
-    ufoShip.translateY(400);
+    ufoShip.translateY(500);
     //tempFloor();
     scene.add(ufoShip);
     addHelpers();
 }
 
 function removeHelpers() {
-    let count = 0;
-    scene.children.forEach((c) => {
-        if (c.type === "SpotLightHelper" ||
-            c.type === "PointLightHelper") {
-            console.log(c.type, "removed!");
-            scene.remove(c);
-            count++;
-        }
+    ufoShip.getPointLightHelpers().forEach((c) =>{
+        scene.remove(c);
     })
-    if (count == 0)
-        console.log("There are no Helpers around these areas.")
+    scene.remove(ufoShip.getSpotLightHelper());
 }
 
 function addHelpers() {
@@ -198,6 +191,10 @@ function keydownHandler(e) {
             removeHelpers();
             break;
 
+        case 'z':
+            addHelpers();
+            break;
+        
         case 'ArrowLeft':
             ufoShip.setLeft(true);
             break;

@@ -3,29 +3,31 @@ class UFO_Lights extends THREE.Object3D {
 	
 	#lights;
 	#lightHelpers;
+	#bulbs
 	#bulbMaterials;
-	constructor(array =[]) {
+	constructor() {
 		super();
 		this.#bulbMaterials = [
 			new THREE.MeshLambertMaterial({
 					color: 0x0000FF,
-					transparent: true
+					transparent: false
 				}),
 			new THREE.MeshPhongMaterial({
 					color: 0x0000FF,
-					transparent: true
+					transparent: false
 				}),
 			new THREE.MeshToonMaterial({
 					color: 0x0000FF,
-					transparent: true
+					transparent: false
 				}),
 			new THREE.MeshBasicMaterial({
 					color: 0x0000FF,
-					transparent: true
+					transparent: false
 			})];
-		this.#lightHelpers = array;
+		this.#bulbs = new THREE.Object3D();
+		this.#lightHelpers = [];
 		this.#lights = this.#generateLights();
-		this.add(this.#lights);
+		this.add(this.#lights, this.#bulbs);
 	}
 
 	#generateLights(){
@@ -33,9 +35,9 @@ class UFO_Lights extends THREE.Object3D {
 		const lights= new THREE.Object3D();
 		for(let i = 0; i<8; i++){
 			let bulbsGeom = new THREE.SphereGeometry( 5, 32, 16, 0, 2*Math.PI, 0, Math.PI );
-			let bulbs = new THREE.Mesh( bulbsGeom, this.#bulbMaterials[0]);
-			let light = new THREE.PointLight('white', 10, 30, 2);
-			bulbs.position.set(radius*Math.cos(i*Math.PI/4),0,radius*Math.sin(i*Math.PI/4));
+			let bulb = new THREE.Mesh( bulbsGeom, this.#bulbMaterials[0]);
+			let light = new THREE.PointLight('white', 15, 40, 2);
+			bulb.position.set(radius*Math.cos(i*Math.PI/4),0,radius*Math.sin(i*Math.PI/4));
 			light.position.set((radius)*Math.cos(i*Math.PI/4),-5,(radius)*Math.sin(i*Math.PI/4));
 			light.castShadow= true;
 			light.shadow.camera.near = 0.1;
@@ -43,7 +45,8 @@ class UFO_Lights extends THREE.Object3D {
 			light.shadow.mapSize.width = 512;
 			light.shadow.mapSize.height = 512;
 			this.#lightHelpers[i] = new THREE.PointLightHelper(light,5);
-			lights.add(bulbs, light);
+			this.#bulbs.add(bulb);
+			lights.add(light);
 		}
 		return lights;
 	}

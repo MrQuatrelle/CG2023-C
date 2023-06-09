@@ -33,7 +33,7 @@ function iterateGrid(){
 
             if (randomNum < probability) {
                 const sobreiro = new tree.Sobreiro(randomHeight, randomAngle);
-                sobreiro.position.set(j/2, 0,i/2);
+                sobreiro.position.set(j/2, 25,i/2);
                 trees.push(sobreiro)
             } 
         }

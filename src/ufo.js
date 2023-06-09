@@ -112,8 +112,7 @@ class Ufo extends THREE.Object3D {
         this.#spotlightHousing.position.set(0, -30, 0);
         this.#cabin.position.set(0, 30, 0);
         this.#spotlight.position.set(0, -30, 0);
-        this.castShadow = true;
-        this.receiveShadow = true;
+
         this.add(this.#cabin, this.#ship, this.#spotlightHousing,
             this.#spotlight, this.#lights);
     }
@@ -122,8 +121,7 @@ class Ufo extends THREE.Object3D {
         const sphereGeometry = new THREE.SphereGeometry(
             40, 32, 32, 0, 2 * Math.PI, 0, (5 / 8) * Math.PI);
         const sphereMesh = new THREE.Mesh(sphereGeometry, this.#cabinMaterials[0]);
-        sphereMesh.castShadow = true;
-        sphereMesh.receiveShadow = true;
+
 
         sphereMesh.translateY(70);
         return sphereMesh;
@@ -134,8 +132,7 @@ class Ufo extends THREE.Object3D {
 
         ellipsoidGeometry.scale(5, 1.5, 5);
         const ellipsoidMesh = new THREE.Mesh(ellipsoidGeometry, this.#shipMaterials[0]);
-        ellipsoidMesh.castShadow = true;
-        ellipsoidMesh.receiveShadow = true;
+
         return ellipsoidMesh;
     }
 
@@ -143,14 +140,12 @@ class Ufo extends THREE.Object3D {
         const tubeGeom = new THREE.CylinderGeometry(60.0, 60.0, 20.0, 32, 10, true, 0, 2 * Math.PI);
         const tubeMesh = new THREE.Mesh(tubeGeom, this.#spotlightHousingMaterials[0]);
 
-        tubeMesh.castShadow = true;
-        tubeMesh.receiveShadow = true;
         return tubeMesh;
     }
 
 
     #generateSpotlight() {
-        const spotlight = new THREE.SpotLight('white', 100.0, 500.0, Math.PI / 6, 0.0, 0.9);
+        const spotlight = new THREE.SpotLight('white', 30.0, 700.0, Math.PI / 6, 0.0, 0.9);
         spotlight.castShadow = true;
         const target = new THREE.Object3D();
         target.position.set(0, -65, 0);
