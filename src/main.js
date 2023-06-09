@@ -17,23 +17,25 @@ function main() {
     // initializations
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.shadowMap.enabled = true;
+    renderer.shadowMap.needsUpdate = true;
     document.body.appendChild(renderer.domElement);
-    scene.background = new THREE.Color("lightblue");
     let axesHelper = new THREE.AxesHelper(1000);
-    cameraControl.setTarget(new THREE.Vector3(95, 240, 110));
+    cameraControl.setTarget(new THREE.Vector3(0, 0, 0));
     camera = cameraControl.camera4;
 
     const dl = new THREE.DirectionalLight(0xffffff, 10);
     dl.position.set(-500, 500, 500);
     dl.castShadow = true;
-    dl.matrixAutoUpdate = true;
-    dl.rotateX(Math.PI / 4);
+    dl.lookAt(0, 0, 0);
 
     terrain.terrain.position.set(0, -400, 0);
-    scene.add(axesHelper, terrain.terrain, dl);
-    scene.add(axesHelper);
 
     dropShip();
+
+    const home = new house.House();
+    home.position.set(0, 100, 0);
+
+    scene.add(axesHelper, dl, home, terrain.terrain);
 
     animate();
 }
