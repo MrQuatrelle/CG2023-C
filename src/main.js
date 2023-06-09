@@ -9,7 +9,7 @@ const renderer = new THREE.WebGLRenderer();
 renderer.shadowMap.autoUpdate = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
-var ufoShip, camera;
+var ufoShip, camera, home, ground;
 
 main();
 
@@ -23,19 +23,19 @@ function main() {
     cameraControl.setTarget(new THREE.Vector3(0, 0, 0));
     camera = cameraControl.camera4;
 
-    const dl = new THREE.DirectionalLight(0xffffff, 10);
+    const dl = new THREE.DirectionalLight(0xffffff, 5);
     dl.position.set(-500, 500, 500);
     dl.castShadow = true;
     dl.lookAt(0, 0, 0);
-
-    terrain.terrain.position.set(0, -400, 0);
+    ground = new terrain.Terrain(); 
+    ground.position.set(0, -400, 0);
 
     dropShip();
 
-    const home = new house.House();
+    home = new house.House();
     home.position.set(0, 100, 0);
 
-    scene.add(axesHelper, dl, home, terrain.terrain);
+    scene.add(axesHelper, dl, home, ground);
 
     animate();
 }
@@ -138,28 +138,31 @@ function keydownHandler(e) {
         case 'q':
             console.log("[INFO]: Setting Materials as Lambert.")
             ufoShip.changeMaterials(0);
-            house.changeMaterials(0);
-            terrain.terrain.material = terrain.terrainMaterials[0];
+            home.changeMaterials(0);
+            ground.changeMaterials(0);
             break;
 
         case 'w':
             console.log("[INFO]: Setting Materials as Phong.")
             ufoShip.changeMaterials(1);
-            house.changeMaterials(1);
-            terrain.terrain.material = terrain.terrainMaterials[1];
+            home.changeMaterials(1);
+            ground.changeMaterials(1);
+            
             break;
 
         case 'e':
             console.log("[INFO]: Setting Materials as Toon.")
             ufoShip.changeMaterials(2);
-            house.changeMaterials(2);
-            terrain.terrain.material = terrain.terrainMaterials[2];
+            home.changeMaterials(2);
+            ground.changeMaterials(2);
+
             break;
         case 'r':
             console.log("[INFO]: Disabling lighting calculations. Setting Materials to Basic.")
             ufoShip.changeMaterials(3);
-            house.changeMaterials(3);
-            terrain.terrain.material = terrain.terrainMaterials[3];
+            home.changeMaterials(3);
+            ground.changeMaterials(3);
+
             break;
 
         case 'p':

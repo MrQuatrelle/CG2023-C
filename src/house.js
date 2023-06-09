@@ -300,6 +300,7 @@ class House extends THREE.Object3D {
 
         this.#door = new THREE.Mesh(
             new doorGeometry(),
+            doorMaterials[0]
         );
         this.#door.geometry.computeVertexNormals();
         this.#door.position.set(0, -30, 60);

@@ -1,6 +1,6 @@
 import * as THREE from "three";
 
-const geometry = new THREE.PlaneGeometry(5000, 5000, 500, 500);
+
 
 
 const heightMapTexture = new THREE.TextureLoader().load(
@@ -46,14 +46,23 @@ const terrainMaterials = [
     })
 ];
 
-const terrain = new THREE.Mesh(geometry, terrainMaterials[0]);
+class Terrain extends THREE.Object3D{
+    #terrain
+    constructor(){
+        super();
+        const geometry = new THREE.PlaneGeometry(5000, 5000, 500, 500);
+        this.#terrain = new THREE.Mesh(geometry, terrainMaterials[0]);
+        this.#terrain.rotateX(Math.PI / -2);
+        this.#terrain.geometry.computeVertexNormals();
+        this.add(this.#terrain)
 
-terrain.castShadow = true;
-terrain.receiveShadow = true;
+    }
+    changeMaterials(type){
+        this.#terrain.material = terrainMaterials[type];
+    }
 
-terrain.rotateX(Math.PI / -2);
-terrain.geometry.computeVertexNormals();
+}
 
 export default {
-    terrain: terrain,
+    Terrain: Terrain
 }
