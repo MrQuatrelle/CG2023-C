@@ -145,7 +145,7 @@ class Ufo extends THREE.Object3D {
 
 
     #generateSpotlight() {
-        const spotlight = new THREE.SpotLight('white', 30.0, 700.0, Math.PI / 6, 0.0, 0.9);
+        const spotlight = new THREE.SpotLight('white', 30.0, 1000.0, Math.PI / 6, 0.0, 0.9);
         spotlight.castShadow = true;
         const target = new THREE.Object3D();
         target.position.set(0, -65, 0);
