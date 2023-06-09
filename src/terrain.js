@@ -20,7 +20,6 @@ const terrainMaterials = [
         bumpMap: heightMapTexture,
         displacementMap: heightMapTexture,
         displacementScale: 3000,
-        shininess: 5,
         shadowSide: THREE.DoubleSide,
     }),
     new THREE.MeshPhongMaterial({
@@ -38,16 +37,11 @@ const terrainMaterials = [
         bumpMap: heightMapTexture,
         displacementMap: heightMapTexture,
         displacementScale: 3000,
-        shininess: 5,
         shadowSide: THREE.DoubleSide,
     }),
     new THREE.MeshBasicMaterial({
         color: 0x92745b,
         map: heightMapTexture,
-        bumpMap: heightMapTexture,
-        displacementMap: heightMapTexture,
-        displacementScale: 3000,
-        shininess: 5,
         shadowSide: THREE.DoubleSide,
     })
 ];
