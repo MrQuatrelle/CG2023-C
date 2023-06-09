@@ -2,7 +2,7 @@ import sobreiro from "./sobreiro.js";
 import tree from "./sobreiro.js";
 import t from "./terrain.js";
 
-function iterateGrid(scene){
+function iterateGrid(){
 
     var width = 5000;   //comprimento do plano
     var height = 5000;      //largura do plano
@@ -10,14 +10,14 @@ function iterateGrid(scene){
     var numSegmentsX = 500;     //comprimento do chunk
     var numSegmentsY = 500;     //largura do chunk
     
-    var probability = 0.1;  //probabilidade de os sobreiros spawnarem num chunk
+    var probability = 0.18;  //probabilidade de os sobreiros spawnarem num chunk
 
-    const minHeight = 50;  //altura minima dos sobreiros
-    const maxHeight = 100;  //altura maxima
+    const minHeight = 100;  //altura minima dos sobreiros
+    const maxHeight = 300;  //altura maxima
 
     const minAngle = 0;     //angulo minimo dos sobreiros
     const maxAngle = 2 * Math.PI;      //angulo maximo
-
+    var trees = [];
     for (let j = -width/2; j <= width/2; j += numSegmentsX) {
         for (let i = -height/2; i <= height/2; i += numSegmentsY) {
             
@@ -32,12 +32,13 @@ function iterateGrid(scene){
             //var yCoordinate = vertex.y;
 
             if (randomNum < probability) {
-                var sobreiro = new tree.Sobreiro(randomHeight, randomAngle);
+                const sobreiro = new tree.Sobreiro(randomHeight, randomAngle);
                 sobreiro.position.set(j/2, 0,i/2);
-                scene.add(sobreiro);
+                trees.push(sobreiro)
             } 
         }
     }
+    return trees;
 }
 
 export default {

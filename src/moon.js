@@ -36,7 +36,7 @@ class Moon extends THREE.Object3D{
 
     #generateDirectionalLight(){
 
-        var directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+        var directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
         directionalLight.position.set(50, 0, 250);
 
         return directionalLight;
@@ -44,7 +44,7 @@ class Moon extends THREE.Object3D{
 
     #generateAmbientLight(){
 
-        var ambientLight = new THREE.AmbientLight( 0x777777 ); // soft white light
+        var ambientLight = new THREE.AmbientLight( 0x777777, 0.002); // soft white light
         
         return ambientLight;
     }

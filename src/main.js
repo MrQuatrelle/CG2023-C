@@ -3,6 +3,7 @@ import house from "./house.js";
 import terrain from "./terrain.js";
 import ufo from "./ufo.js"
 import cameraControl from "./camera.js";
+import textures from "./textures.js"
 import tree from "./tree_generation.js";
 import moon from "./moon.js";
 
@@ -12,6 +13,7 @@ renderer.shadowMap.autoUpdate = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
 var ufoShip, camera, home, ground, moon2;
+var trees;
 
 main();
 
@@ -32,14 +34,20 @@ function main() {
     ground = new terrain.Terrain(); 
     ground.position.set(0, -400, 0);
 
+    scene.add(textures.skyDome)
+
     dropShip();
+    trees = tree.iterateGrid();
+    trees.forEach((c) =>{
+        scene.add(c);
+    })
 
     moon2 = new moon.Moon(500);
     home = new house.House();
     home.position.set(0, 100, 0);
 
     scene.add(axesHelper, dl,  home, ground);
-    //tree.iterateGrid(scene);  //sobreiros
+    tree.iterateGrid(scene);  
 
 
     animate();
@@ -55,7 +63,6 @@ function tempFloor() {
     floor.rotateX(Math.PI / 2);
     floor.position.set(0, 0, 0);
     scene.add(floor);
-    scene.add(new THREE.AmbientLight("lightyellow", 0.02))
 }
 
 function animate() {
@@ -145,6 +152,9 @@ function keydownHandler(e) {
             ufoShip.changeMaterials(0);
             home.changeMaterials(0);
             ground.changeMaterials(0);
+            trees.forEach((c) => {
+                c.changeMaterials(0)
+            })
             break;
 
         case 'w':
@@ -152,7 +162,9 @@ function keydownHandler(e) {
             ufoShip.changeMaterials(1);
             home.changeMaterials(1);
             ground.changeMaterials(1);
-            
+            trees.forEach((c) => {
+                c.changeMaterials(1)
+            })
             break;
 
         case 'e':
@@ -160,14 +172,18 @@ function keydownHandler(e) {
             ufoShip.changeMaterials(2);
             home.changeMaterials(2);
             ground.changeMaterials(2);
-
+            trees.forEach((c) => {
+                c.changeMaterials(2)
+            });
             break;
         case 'r':
             console.log("[INFO]: Disabling lighting calculations. Setting Materials to Basic.")
             ufoShip.changeMaterials(3);
             home.changeMaterials(3);
             ground.changeMaterials(3);
-
+            trees.forEach((c) => {
+                c.changeMaterials(3)
+            })
             break;
 
         case 'p':

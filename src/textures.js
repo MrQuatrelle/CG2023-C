@@ -40,7 +40,7 @@ var skyMaterial = new THREE.MeshBasicMaterial({
   side: THREE.BackSide //backside significa que só dá load à parte de dentro da esfera
 });
 
-var skyGeometry = new THREE.SphereGeometry(300, 32, 32, 0, 2 * Math.PI, 0,  (1/2) * Math.PI);
+var skyGeometry = new THREE.SphereGeometry(3000, 32, 32, 0, 2 * Math.PI, 0,  (1/2) * Math.PI);
 var skyDome = new THREE.Mesh(skyGeometry, skyMaterial);
 
 
@@ -96,5 +96,5 @@ var floorMaterial = new THREE.MeshBasicMaterial({
 
 export default {
     skyDome: skyDome,
-    floorMaterial: floorMaterial,
+    floorTexture: floorTexture,
 }
