@@ -182,63 +182,136 @@ class doorGeometry extends THREE.BufferGeometry {
     }
 }
 
+const doorMaterials = [
+    new THREE.MeshLambertMaterial({
+        color: "brown",
+        side: THREE.FrontSide,
+    }),
+    new THREE.MeshPhongMaterial({
+        color: "brown",
+        side: THREE.FrontSide,
+    }),
+    new THREE.MeshToonMaterial({
+        color: "brown",
+        side: THREE.FrontSide,
+    }),
+    new THREE.MeshBasicMaterial({
+        color: "brown",
+        side: THREE.FrontSide,
+    }),
 
-class House extends THREE.Object3D {
-    constructor() {
-        super();
-        const walls = new THREE.Mesh(
-            new HouseWallsGeometry(),
-            new THREE.MeshPhongMaterial({
+    ];
+
+const wallsMaterials = [
+    new THREE.MeshLambertMaterial({
                 color: 0xffffff,
                 side: THREE.FrontSide,
-            })
+            }),
+    new THREE.MeshPhongMaterial({
+                color: 0xffffff,
+                side: THREE.FrontSide,
+            }),
+    new THREE.MeshToonMaterial({
+                color: 0xffffff,
+                side: THREE.FrontSide,
+            }),
+    new THREE.MeshBasicMaterial({
+                color: 0xffffff,
+                side: THREE.FrontSide,
+            }),
+    ];
+
+const roofMaterials = [
+    new THREE.MeshLambertMaterial({
+        color: 0xff5500,
+        side: THREE.FrontSide,
+    }),
+    new THREE.MeshPhongMaterial({
+        color: 0xff5500,
+        side: THREE.FrontSide,
+    }),
+    new THREE.MeshToonMaterial({
+        color: 0xff5500,
+        side: THREE.FrontSide,
+    }),
+    new THREE.MeshBasicMaterial({
+        color: 0xff5500,
+        side: THREE.FrontSide,
+    })
+];
+
+const windowsMaterials = [
+    new THREE.MeshLambertMaterial({
+        color: 0x0033ff88,
+        side: THREE.FrontSide,
+    }),
+    new THREE.MeshPhongMaterial({
+        color: 0x0033ff88,
+        side: THREE.FrontSide,
+    }),
+    new THREE.MeshToonMaterial({
+        color: 0x0033ff88,
+        side: THREE.FrontSide,
+    }),
+    new THREE.MeshBasicMaterial({
+        color: 0x0033ff88,
+        side: THREE.FrontSide,
+    })
+];
+
+
+class House extends THREE.Object3D {
+    #walls
+    #roof
+    #leftWindow
+    #rightWindow
+    #door
+    constructor() {
+        
+        super();
+        this.#walls = new THREE.Mesh(
+            new HouseWallsGeometry(),
+            wallsMaterials[0]
         );
 
-        walls.geometry.computeVertexNormals();
+        this.#walls.geometry.computeVertexNormals();
 
-        const roof = new THREE.Mesh(
+        this.#roof = new THREE.Mesh(
             new HouseRoofGeometry(),
-            new THREE.MeshPhongMaterial({
-                color: 0xff5500,
-                side: THREE.FrontSide,
-            })
+            roofMaterials[0]
         );
-        roof.geometry.computeVertexNormals();
+        this.#roof.geometry.computeVertexNormals();
 
-        const leftWindow = new THREE.Mesh(
+        this.#leftWindow = new THREE.Mesh(
             new windowGeometry(),
-            new THREE.MeshPhongMaterial({
-                color: 0x0033ff88,
-                side: THREE.FrontSide,
-            })
+            windowsMaterials[0]
         );
 
-        leftWindow.geometry.computeVertexNormals();
-        leftWindow.position.set(90, 0, 60);
+        this.#leftWindow.geometry.computeVertexNormals();
+        this.#leftWindow.position.set(90, 0, 60);
 
-        const rightWindow = new THREE.Mesh(
+        this.#rightWindow = new THREE.Mesh(
             new windowGeometry(),
-            new THREE.MeshPhongMaterial({
-                color: 0x0033ff88,
-                side: THREE.FrontSide,
-
-            })
+            windowsMaterials[0]
         );
-        rightWindow.geometry.computeVertexNormals();
-        rightWindow.position.set(-90, 0, 60);
 
-        const door = new THREE.Mesh(
+        this.#rightWindow.geometry.computeVertexNormals();
+        this.#rightWindow.position.set(-90, 0, 60);
+
+        this.#door = new THREE.Mesh(
             new doorGeometry(),
-            new THREE.MeshPhongMaterial({
-                color: "brown",
-                side: THREE.FrontSide,
-
-            })
         );
-        door.geometry.computeVertexNormals();
-        door.position.set(0, -30, 60);
+        this.#door.geometry.computeVertexNormals();
+        this.#door.position.set(0, -30, 60);
 
-        this.add(walls, roof, leftWindow, rightWindow, door);
+        this.add(this.#walls, this.#roof, this.#leftWindow, this.#rightWindow, this.#door);
+    }
+    changeMaterials(type){
+        this.#walls.material = wallsMaterials[type];
+        this.#rightWindow.material = windowsMaterials[type];
+        this.#leftWindow.material = windowsMaterials[type];
+        this.#door.material = doorMaterials[type];
+        this.#roof.material = roofMaterials[type];
     }
 }
 
