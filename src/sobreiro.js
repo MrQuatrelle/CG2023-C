@@ -38,6 +38,11 @@ class Sobreiro extends THREE.Object3D {
 					transparent: false,
 					shadowSide: THREE.DoubleSide
 
+			}),
+			new THREE.MeshBasicMaterial({
+					color: 0xA55D35,
+					wireframe: false,
+					transparent: false
 			})];
 		this.#copasMaterials = [
 			new THREE.MeshLambertMaterial({
@@ -57,6 +62,11 @@ class Sobreiro extends THREE.Object3D {
 					wireframe: false,
 					transparent: false,
 					shadowSide: THREE.DoubleSide
+			}),
+			new THREE.MeshBasicMaterial({
+					color: 0x3A5F0B,
+					wireframe: false,
+					transparent: false
 			})];
 		
 		this.#tronco = this.#generateLog();

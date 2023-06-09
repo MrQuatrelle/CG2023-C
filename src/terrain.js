@@ -13,17 +13,46 @@ const heightMapTexture = new THREE.TextureLoader().load(
 );
 
 
-const terrainMaterial = new THREE.MeshPhongMaterial({
-    color: 0x92745b,
-    map: heightMapTexture,
-    bumpMap: heightMapTexture,
-    displacementMap: heightMapTexture,
-    displacementScale: 3000,
-    shininess: 5,
-    shadowSide: THREE.DoubleSide,
-});
+const terrainMaterials = [
+    new THREE.MeshLambertMaterial({
+        color: 0x92745b,
+        map: heightMapTexture,
+        bumpMap: heightMapTexture,
+        displacementMap: heightMapTexture,
+        displacementScale: 3000,
+        shininess: 5,
+        shadowSide: THREE.DoubleSide,
+    }),
+    new THREE.MeshPhongMaterial({
+        color: 0x92745b,
+        map: heightMapTexture,
+        bumpMap: heightMapTexture,
+        displacementMap: heightMapTexture,
+        displacementScale: 3000,
+        shininess: 5,
+        shadowSide: THREE.DoubleSide,
+    }),
+    new THREE.MeshToonMaterial({
+        color: 0x92745b,
+        map: heightMapTexture,
+        bumpMap: heightMapTexture,
+        displacementMap: heightMapTexture,
+        displacementScale: 3000,
+        shininess: 5,
+        shadowSide: THREE.DoubleSide,
+    }),
+    new THREE.MeshBasicMaterial({
+        color: 0x92745b,
+        map: heightMapTexture,
+        bumpMap: heightMapTexture,
+        displacementMap: heightMapTexture,
+        displacementScale: 3000,
+        shininess: 5,
+        shadowSide: THREE.DoubleSide,
+    })
+];
 
-const terrain = new THREE.Mesh(geometry, terrainMaterial);
+const terrain = new THREE.Mesh(geometry, terrainMaterial[0]);
 
 terrain.castShadow = true;
 terrain.receiveShadow = true;

@@ -18,7 +18,11 @@ class UFO_Lights extends THREE.Object3D {
 			new THREE.MeshToonMaterial({
 					color: 0x0000FF,
 					transparent: true
-				})];
+				}),
+			new THREE.MeshBasicMaterial({
+					color: 0x0000FF,
+					transparent: true
+			})];
 		this.#lightHelpers = array;
 		this.#lights = this.#generateLights();
 		this.add(this.#lights);

@@ -138,16 +138,24 @@ function keydownHandler(e) {
         case 'q':
             console.log("[INFO]: Setting Materials as Lambert.")
             ufoShip.changeMaterials(0);
+            terrain.terrain.material = terrain.terrainMaterials[0];
             break;
 
         case 'w':
             console.log("[INFO]: Setting Materials as Phong.")
             ufoShip.changeMaterials(1);
+            terrain.terrain.material = terrain.terrainMaterials[1];
             break;
 
         case 'e':
             console.log("[INFO]: Setting Materials as Toon.")
             ufoShip.changeMaterials(2);
+            terrain.terrain.material = terrain.terrainMaterials[2];
+            break;
+        case 'r':
+            console.log("[INFO]: Disabling lighting calculations. Setting Materials to Basic.")
+            ufoShip.changeMaterials(3);
+            terrain.terrain.material = terrain.terrainMaterials[3];
             break;
 
         case 'p':

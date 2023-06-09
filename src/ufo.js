@@ -53,7 +53,12 @@ class Ufo extends THREE.Object3D {
                 transparent: false,
                 shadowSide: THREE.DoubleSide
 
-            })];
+            }),
+			new THREE.MeshBasicMaterial({
+				color: 0x555555,
+				wireframe: false,
+				transparent: false
+			})];
         this.#shipMaterials = [
             new THREE.MeshLambertMaterial({
                 color: 0x225522,
@@ -72,8 +77,12 @@ class Ufo extends THREE.Object3D {
                 wireframe: false,
                 transparent: false,
                 shadowSide: THREE.DoubleSide
-            })
-        ];
+            }),
+			new THREE.MeshBasicMaterial({
+				color: 0x225522,
+				wireframe: false,
+				transparent: false
+			})];
 
         this.#spotlightHousingMaterials = [
             new THREE.MeshLambertMaterial({
@@ -87,8 +96,12 @@ class Ufo extends THREE.Object3D {
             new THREE.MeshToonMaterial({
                 color: 0xFF00AA,
                 side: THREE.DoubleSide
-            })
-        ];
+            }),
+			new THREE.MeshBasicMaterial({
+				color: 0xFF00AA,
+				wireframe: false,
+				transparent: false
+			})];
 
         this.#cabin = this.#generateCabin();
         this.#ship = this.#generateShip();
