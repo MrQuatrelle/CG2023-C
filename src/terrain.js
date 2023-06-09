@@ -46,7 +46,7 @@ const terrainMaterials = [
     })
 ];
 
-const terrain = new THREE.Mesh(geometry, terrainMaterial[0]);
+const terrain = new THREE.Mesh(geometry, terrainMaterials[0]);
 
 terrain.castShadow = true;
 terrain.receiveShadow = true;
