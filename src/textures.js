@@ -90,11 +90,11 @@ var floorMaterial = new THREE.MeshBasicMaterial({
   map: floorTexture, 
   side: THREE.FrontSide //frontside significa que só dá load à parte de dentro da esfera 
 });
-var floorGeometry = new THREE.PlaneGeometry(600, 600);
-var floorText = new THREE.Mesh(floorGeometry, floorMaterial);
-floorText.rotation.x = -Math.PI / 2; // Rotate 90 degrees around the x-axis
+//var floorGeometry = new THREE.PlaneGeometry(600, 600);
+//var floorText = new THREE.Mesh(floorGeometry, floorMaterial);
+//floorText.rotation.x = -Math.PI / 2; // Rotate 90 degrees around the x-axis
 
 export default {
     skyDome: skyDome,
-    floorText: floorText,
+    floorMaterial: floorMaterial,
 }

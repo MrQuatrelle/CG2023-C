@@ -11,7 +11,7 @@ const renderer = new THREE.WebGLRenderer();
 renderer.shadowMap.autoUpdate = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
-var ufoShip, camera, home, ground;
+var ufoShip, camera, home, ground, moon2;
 
 main();
 
@@ -34,12 +34,12 @@ function main() {
 
     dropShip();
 
-    moon = new moon.Moon(50);
+    moon2 = new moon.Moon(500);
     home = new house.House();
     home.position.set(0, 100, 0);
 
-    scene.add(axesHelper, dl, home, ground);
-    tree.iterateGrid(scene);
+    scene.add(axesHelper, dl,  home, ground);
+    //tree.iterateGrid(scene);  //sobreiros
 
 
     animate();

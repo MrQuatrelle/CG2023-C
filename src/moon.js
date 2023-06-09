@@ -18,7 +18,7 @@ class Moon extends THREE.Object3D{
 
     #generateMoon(){
 
-        const moonGeom = new THREE.SphereGeometry(this.radius, 30 ,30);
+        var moonGeom = new THREE.SphereGeometry(this.radius, 30 ,30);
 
         var textureLoader = new THREE.TextureLoader();
         var texture = textureLoader.load('moon_texture.jpg');
